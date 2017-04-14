@@ -14,7 +14,8 @@ module.exports = {
   extends: ['eslint:recommended', 'airbnb-base'],
   // required to lint *.vue files
   plugins: [
-    'html'
+    'html',
+    'flowtype-errors'
   ],
   // check if imports actually resolve
   'settings': {
@@ -57,5 +58,6 @@ module.exports = {
     'quotes': ["off", "double", { "allowTemplateLiterals": true }],
     'no-multi-spaces': ["error", { exceptions: { "ObjectExpression": true } }],
     // 'key-spacing': ["error", { align: "value" }]
+    'flowtype-errors/show-errors': 2,
   }
 }
