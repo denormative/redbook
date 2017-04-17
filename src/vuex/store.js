@@ -5,6 +5,18 @@ Vue.use(Vuex)
 
 const storeState = {
   /* beautify preserve:start */
+  party: {
+    characters: {
+      test: {
+        name: "Test",
+        abilities: {},
+      },
+      test2: {
+        name: "Test2",
+        abilities: {},
+      },
+    },
+  },
   /* beautify preserve:end */
 }
 
