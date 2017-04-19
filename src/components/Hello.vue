@@ -19,9 +19,9 @@
 
         <h6 class="buttonLabel" data-toggle="collapse" href="#basic-tables-buttons">Basic Tables</h6>
         <div id="basic-tables-buttons" class="collapse show">
-          <button class="btn btn-default btn-sm" @click="output(oddTables.characterStats());">stats</button>
-          <button class="btn btn-default btn-sm" @click="output(oddTables.reaction());">reaction</button>
-          <button class="btn btn-default btn-sm" @click="output(oddTables.loyalty());">loyalty</button>
+          <button class="btn btn-default btn-sm" @click="output(characterStats())">stats</button>
+          <button class="btn btn-default btn-sm" @click="output(reaction())">reaction</button>
+          <button class="btn btn-default btn-sm" @click="output(loyalty())">loyalty</button>
         </div>
 
 
@@ -266,6 +266,7 @@ import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import { rollAbilities } from '../vuex/abilities.js'
 import { roll } from '../assets/dice.js'
 import oddNames from '../assets/oddNames.js'
+import oddUtils from '../assets/odd/oddUtils.js'
 
 export default {
   name: 'hello',
@@ -303,6 +304,7 @@ export default {
     },
     ...roll,
     ...oddNames,
+    ...oddUtils,
   },
 }
 
@@ -320,4 +322,7 @@ li {
   margin: 0 10px;
 }
 
+textarea {
+  font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+}
 </style>
