@@ -34,7 +34,7 @@
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(oddTables.magicSword());">Sword</a></li>
+              <li><a @click="output(magicSword())">Sword</a></li>
               <li><a @click="output(oddTables.miscWeapon());">Weapon</a></li>
               <li><a @click="output(oddTables.armor());">Armor</a></li>
               <li><a @click="output(oddTables.potion(true));">Potion</a></li>
@@ -267,6 +267,7 @@ import { rollAbilities } from '../vuex/abilities.js'
 import { roll } from '../assets/dice.js'
 import oddNames from '../assets/oddNames.js'
 import oddUtils from '../assets/odd/oddUtils.js'
+import oddMagicSwords from '../assets/odd/oddMagicSwords.js'
 
 export default {
   name: 'hello',
@@ -305,6 +306,7 @@ export default {
     ...roll,
     ...oddNames,
     ...oddUtils,
+    ...oddMagicSwords,
   },
 }
 
