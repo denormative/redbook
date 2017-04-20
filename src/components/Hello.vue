@@ -47,38 +47,38 @@
           </div>
 
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(oddTables.treasureTypeA());">Type A Land</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(treasureTypeA());">Type A Land</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(oddTables.treasureTypeADesert());">Type A Desert</a></li>
-              <li><a @click="output(oddTables.treasureTypeAWater());">Type A Water</a></li>
-              <li><a @click="output(oddTables.treasureTypeB());">Type B</a></li>
-              <li><a @click="output(oddTables.treasureTypeC());">Type C</a></li>
-              <li><a @click="output(oddTables.treasureTypeD());">Type D</a></li>
-              <li><a @click="output(oddTables.treasureTypeE());">Type E</a></li>
-              <li><a @click="output(oddTables.treasureTypeF());">Type F</a></li>
-              <li><a @click="output(oddTables.treasureTypeG());">Type G</a></li>
-              <li><a @click="output(oddTables.treasureTypeH());">Type H</a></li>
-              <li><a @click="output(oddTables.treasureTypeI());">Type I</a></li>
+              <li><a @click="output(treasureTypeADesert());">Type A Desert</a></li>
+              <li><a @click="output(treasureTypeAWater());">Type A Water</a></li>
+              <li><a @click="output(treasureTypeB());">Type B</a></li>
+              <li><a @click="output(treasureTypeC());">Type C</a></li>
+              <li><a @click="output(treasureTypeD());">Type D</a></li>
+              <li><a @click="output(treasureTypeE());">Type E</a></li>
+              <li><a @click="output(treasureTypeF());">Type F</a></li>
+              <li><a @click="output(treasureTypeG());">Type G</a></li>
+              <li><a @click="output(treasureTypeH());">Type H</a></li>
+              <li><a @click="output(treasureTypeI());">Type I</a></li>
             </ul>
           </div>
 
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(oddTables.treasureLevel1());">Level 1</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(treasureLevel1());">Level 1</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(oddTables.treasureLevel2to3());">Level 2-3</a></li>
-              <li><a @click="output(oddTables.treasureLevel4to5());">Level 4-5</a></li>
-              <li><a @click="output(oddTables.treasureLevel6to7());">Level 6-7</a></li>
-              <li><a @click="output(oddTables.treasureLevel8to9());">Level 8-9</a></li>
-              <li><a @click="output(oddTables.treasureLevel10to12());">Level 10-12</a></li>
-              <li><a @click="output(oddTables.treasureLevel13());">Level 13+</a></li>
+              <li><a @click="output(treasureLevel2to3());">Level 2-3</a></li>
+              <li><a @click="output(treasureLevel4to5());">Level 4-5</a></li>
+              <li><a @click="output(treasureLevel6to7());">Level 6-7</a></li>
+              <li><a @click="output(treasureLevel8to9());">Level 8-9</a></li>
+              <li><a @click="output(treasureLevel10to12());">Level 10-12</a></li>
+              <li><a @click="output(treasureLevel13());">Level 13+</a></li>
             </ul>
           </div>
         </div>
@@ -270,6 +270,7 @@ import oddUtils from '../assets/odd/oddUtils.js'
 import oddMagicSwords from '../assets/odd/oddMagicSwords.js'
 import oddMagicItems from '../assets/odd/oddMagicItems.js'
 import oddWildernessEncounters from '../assets/odd/oddWildernessEncounters.js'
+import oddTreasureTables from '../assets/odd/oddTreasureTables.js'
 
 export default {
   name: 'hello',
@@ -311,6 +312,7 @@ export default {
     ...oddMagicSwords,
     ...oddMagicItems,
     ...oddWildernessEncounters,
+    ...oddTreasureTables,
   },
 }
 
