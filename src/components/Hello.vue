@@ -101,20 +101,20 @@
           </div>
 
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(oddTables.encounterClear());">Clear Terrain</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(encounterClear())">Clear Terrain</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(oddTables.encounterWoods());">Woods</a></li>
-              <li><a @click="output(oddTables.encounterRiver());">River</a></li>
-              <li><a @click="output(oddTables.encounterSwamp());">Swamp</a></li>
-              <li><a @click="output(oddTables.encounterMountains());">Mountains</a></li>
-              <li><a @click="output(oddTables.encounterDesert());">Desert</a></li>
-              <li><a @click="output(oddTables.encounterCity());">City</a></li>
-              <li><a @click="output(oddTables.encounterMars());">Mars</a></li>
-              <li><a @click="output(oddTables.encounterLostWorld());">Lost World</a></li>
+              <li><a @click="output(encounterWoods())">Woods</a></li>
+              <li><a @click="output(encounterRiver())">River</a></li>
+              <li><a @click="output(encounterSwamp())">Swamp</a></li>
+              <li><a @click="output(encounterMountains())">Mountains</a></li>
+              <li><a @click="output(encounterDesert())">Desert</a></li>
+              <li><a @click="output(encounterCity())">City</a></li>
+              <li><a @click="output(encounterMars())">Mars</a></li>
+              <li><a @click="output(encounterLostWorld())">Lost World</a></li>
             </ul>
           </div>
 
@@ -269,6 +269,7 @@ import oddNames from '../assets/oddNames.js'
 import oddUtils from '../assets/odd/oddUtils.js'
 import oddMagicSwords from '../assets/odd/oddMagicSwords.js'
 import oddMagicItems from '../assets/odd/oddMagicItems.js'
+import oddWildernessEncounters from '../assets/odd/oddWildernessEncounters.js'
 
 export default {
   name: 'hello',
@@ -309,6 +310,7 @@ export default {
     ...oddUtils,
     ...oddMagicSwords,
     ...oddMagicItems,
+    ...oddWildernessEncounters,
   },
 }
 
