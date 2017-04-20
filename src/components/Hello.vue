@@ -28,21 +28,21 @@
         <h6 class="buttonLabel" data-toggle="collapse" href="#treasure-buttons">Treasure Tables</h6>
         <div id="treasure-buttons" class="collapse.in">
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(oddTables.magicItem());">Magic Item</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(magicItem())">Magic Item</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
               <li><a @click="output(magicSword())">Sword</a></li>
-              <li><a @click="output(oddTables.miscWeapon());">Weapon</a></li>
-              <li><a @click="output(oddTables.armor());">Armor</a></li>
-              <li><a @click="output(oddTables.potion(true));">Potion</a></li>
-              <li><a @click="output(oddTables.scroll());">Scroll</a></li>
-              <li><a @click="output(oddTables.ring(true));">Ring</a></li>
-              <li><a @click="output(oddTables.wand());">Wand</a></li>
-              <li><a @click="output(oddTables.miscMagic());">Misc</a></li>
-              <li><a @click="output(oddTables.treasureMap());">Treasure Map</a></li>
+              <li><a @click="output(miscWeapon())">Weapon</a></li>
+              <li><a @click="output(armor())">Armor</a></li>
+              <li><a @click="output(potion(true))">Potion</a></li>
+              <li><a @click="output(scroll())">Scroll</a></li>
+              <li><a @click="output(ring(true))">Ring</a></li>
+              <li><a @click="output(wand())">Wand</a></li>
+              <li><a @click="output(miscMagic())">Misc</a></li>
+              <li><a @click="output(treasureMap())">Treasure Map</a></li>
             </ul>
           </div>
 
@@ -268,6 +268,7 @@ import { roll } from '../assets/dice.js'
 import oddNames from '../assets/oddNames.js'
 import oddUtils from '../assets/odd/oddUtils.js'
 import oddMagicSwords from '../assets/odd/oddMagicSwords.js'
+import oddMagicItems from '../assets/odd/oddMagicItems.js'
 
 export default {
   name: 'hello',
@@ -307,6 +308,7 @@ export default {
     ...oddNames,
     ...oddUtils,
     ...oddMagicSwords,
+    ...oddMagicItems,
   },
 }
 

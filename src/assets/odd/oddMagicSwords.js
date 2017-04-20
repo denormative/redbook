@@ -380,4 +380,5 @@ const oddMagicSwords = {
 
 export {
   oddMagicSwords as default,
+  magicSword,
 }
