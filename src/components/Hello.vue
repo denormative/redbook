@@ -221,11 +221,10 @@
 
         <h6 class="buttonLabel" data-toggle="collapse" href="#experimental-buttons">Experimental</h6>
         <div id="experimental-buttons" class="collapse.in">
-          <button type="button" class="btn btn-default btn-sm" @click="output(oddMonsters.bandit.toString());">Bandit</button>
-          <button type="button" class="btn btn-default btn-sm" @click="output(oddEncounters.bandits());">Bandit Group</button>
-          <button type="button" class="btn btn-default btn-sm" @click="output(oddEncounters.brigands());">Brigand Group</button>
-          <button type="button" class="btn btn-default btn-sm" @click="output(oddEncounters.orcs());">Orc Lair</button>
-          <button type="button" class="btn btn-default btn-sm" @click="output(oddEncounters.village());">Village</button>
+          <button type="button" class="btn btn-default btn-sm" @click="output(bandits())">Bandit Group</button>
+          <button type="button" class="btn btn-default btn-sm" @click="output(brigands())">Brigand Group</button>
+          <button type="button" class="btn btn-default btn-sm" @click="output(orcs())">Orc Lair</button>
+          <button type="button" class="btn btn-default btn-sm" @click="output(village())">Village</button>
         </div>
 
 
@@ -273,6 +272,7 @@ import oddWildernessEncounters from '../assets/odd/oddWildernessEncounters.js'
 import oddTreasureTables from '../assets/odd/oddTreasureTables.js'
 import oddNPCs from '../assets/odd/oddNPCs.js'
 import oddDungeonEncounters from '../assets/odd/oddDungeonEncounters.js'
+import oddEncounters from '../assets/odd/oddEncounters.js'
 
 export default {
   name: 'hello',
@@ -317,6 +317,7 @@ export default {
     ...oddTreasureTables,
     ...oddNPCs,
     ...oddDungeonEncounters,
+    ...oddEncounters,
   },
 }
 
