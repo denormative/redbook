@@ -86,17 +86,17 @@
         <h6 class="buttonLabel" data-toggle="collapse" href="#encounter-buttons">Encounter Tables</h6>
         <div id="encounter-buttons" class="collapse.in">
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(oddTables.monsterLevel1());">Dungeon Level 1</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(monsterLevel1());">Dungeon Level 1</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(oddTables.monsterLevel2());">Dungeon Level 2</a></li>
-              <li><a @click="output(oddTables.monsterLevel3());">Dungeon Level 3</a></li>
-              <li><a @click="output(oddTables.monsterLevel4());">Dungeon Level 4</a></li>
-              <li><a @click="output(oddTables.monsterLevel5());">Dungeon Level 5</a></li>
-              <li><a @click="output(oddTables.monsterLevel6());">Dungeon Level 6</a></li>
+              <li><a @click="output(monsterLevel2());">Dungeon Level 2</a></li>
+              <li><a @click="output(monsterLevel3());">Dungeon Level 3</a></li>
+              <li><a @click="output(monsterLevel4());">Dungeon Level 4</a></li>
+              <li><a @click="output(monsterLevel5());">Dungeon Level 5</a></li>
+              <li><a @click="output(monsterLevel6());">Dungeon Level 6</a></li>
             </ul>
           </div>
 
@@ -272,6 +272,7 @@ import oddMagicItems from '../assets/odd/oddMagicItems.js'
 import oddWildernessEncounters from '../assets/odd/oddWildernessEncounters.js'
 import oddTreasureTables from '../assets/odd/oddTreasureTables.js'
 import oddNPCs from '../assets/odd/oddNPCs.js'
+import oddDungeonEncounters from '../assets/odd/oddDungeonEncounters.js'
 
 export default {
   name: 'hello',
@@ -315,6 +316,7 @@ export default {
     ...oddWildernessEncounters,
     ...oddTreasureTables,
     ...oddNPCs,
+    ...oddDungeonEncounters,
   },
 }
 

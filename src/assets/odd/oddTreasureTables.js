@@ -433,22 +433,4 @@ const oddTreasureTables = {
 
 export {
   oddTreasureTables as default,
-  treasureTypeA,
-  treasureTypeADesert,
-  treasureTypeAWater,
-  treasureTypeB,
-  treasureTypeC,
-  treasureTypeD,
-  treasureTypeE,
-  treasureTypeF,
-  treasureTypeG,
-  treasureTypeH,
-  treasureTypeI,
-  treasureLevel1,
-  treasureLevel2to3,
-  treasureLevel4to5,
-  treasureLevel6to7,
-  treasureLevel8to9,
-  treasureLevel10to12,
-  treasureLevel13,
 }
