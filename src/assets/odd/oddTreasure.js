@@ -68,6 +68,29 @@ function gemValue() {
   }
 }
 
+// oddTables.gems = function (number) {
+//   var numLots, result;
+//   number = (typeof number === "number") ? number : 1;
+//   number = (number < 1) ? 1 : number;
+//   numLots = Math.floor(number / 10);
+//   number = number % 10;
+
+//   result = "";
+//   while (numLots > 0) {
+//     result += "10 gems worth " + oddTables.gemValue() + "gp each\n  ";
+//     numLots--;
+//   }
+//   if (number > 5) {
+//     result += "5 gems worth " + oddTables.gemValue() + "gp each\n  ";
+//     number = number - 5;
+//   }
+//   while (number > 0) {
+//     result += "1 gem worth " + oddTables.gemValue() + "gp\n  ";
+//     number--;
+//   }
+//   return result;
+// };
+
 function gems(numberArg) {
   let number = (typeof numberArg === "number") ? numberArg : 1
   number = (number < 1) ? 1 : number

@@ -27,6 +27,16 @@
 
 import { d6 } from '../dice.js'
 
+/* Misc. Convenience Functions */
+// oddTables.indentLines = function (text) {
+//   let output = ""
+//   const strings = text.split("\n")
+//   for (let i = 0; i < strings.length; i++) {
+//     output = `  ${strings[i]}\n`
+//   }
+//   return output
+// }
+
 /* general utility tables */
 function characterStats() {
   let output = ""
