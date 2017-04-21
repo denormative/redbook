@@ -42,7 +42,7 @@ function rollAbilities() {
   })
   recalculateAbilityModifiers(abilities)
 
-  console.log(abilities)
+  // console.log(abilities)
 
   return abilities
 }

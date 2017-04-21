@@ -118,7 +118,7 @@
             </ul>
           </div>
 
-          <button class="btn btn-default btn-sm" @click="output(oddTables.castleEncounter());">Castle</button>
+          <button class="btn btn-default btn-sm" @click="output(castleEncounter());">Castle</button>
         </div>
 
         <h6 class="buttonLabel" data-toggle="collapse" href="#names-buttons">Names</h6>
@@ -131,90 +131,90 @@
         <h6 class="buttonLabel" data-toggle="collapse" href="#npcs-buttons">NPCs</h6>
         <div id="npcs-buttons" class="collapse.in">
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(oddTables.npcFighter(dice.d10()));">Fighter</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(npcFighter(d10()));">Fighter</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(oddTables.npcFighter(1));">Veteran (1)</a></li>
-              <li><a @click="output(oddTables.npcFighter(2));">Warrior (2)</a></li>
-              <li><a @click="output(oddTables.npcFighter(3));">Swordsman (3)</a></li>
-              <li><a @click="output(oddTables.npcFighter(4));">Hero (4)</a></li>
-              <li><a @click="output(oddTables.npcFighter(5));">Swashbuckler (5)</a></li>
-              <li><a @click="output(oddTables.npcFighter(6));">Myrmidon (6)</a></li>
-              <li><a @click="output(oddTables.npcFighter(7));">Champion (7)</a></li>
-              <li><a @click="output(oddTables.npcFighter(8));">Superhero (8)</a></li>
-              <li><a @click="output(oddTables.npcFighter(9));">Lord (9)</a></li>
-              <li><a @click="output(oddTables.npcFighter(10));">Lord (10)</a></li>
-              <li><a @click="output(oddTables.npcFighter(11));">Lord (11)</a></li>
-              <li><a @click="output(oddTables.npcFighter(12));">Lord (12)</a></li>
+              <li><a @click="output(npcFighter(1));">Veteran (1)</a></li>
+              <li><a @click="output(npcFighter(2));">Warrior (2)</a></li>
+              <li><a @click="output(npcFighter(3));">Swordsman (3)</a></li>
+              <li><a @click="output(npcFighter(4));">Hero (4)</a></li>
+              <li><a @click="output(npcFighter(5));">Swashbuckler (5)</a></li>
+              <li><a @click="output(npcFighter(6));">Myrmidon (6)</a></li>
+              <li><a @click="output(npcFighter(7));">Champion (7)</a></li>
+              <li><a @click="output(npcFighter(8));">Superhero (8)</a></li>
+              <li><a @click="output(npcFighter(9));">Lord (9)</a></li>
+              <li><a @click="output(npcFighter(10));">Lord (10)</a></li>
+              <li><a @click="output(npcFighter(11));">Lord (11)</a></li>
+              <li><a @click="output(npcFighter(12));">Lord (12)</a></li>
             </ul>
           </div>
 
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(oddTables.npcThief(dice.d10()));">Thief</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(npcThief(d10()));">Thief</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(oddTables.npcThief(1));">Apprentice (1)</a></li>
-              <li><a @click="output(oddTables.npcThief(2));">Footpad (2)</a></li>
-              <li><a @click="output(oddTables.npcThief(3));">Robber (3)</a></li>
-              <li><a @click="output(oddTables.npcThief(4));">Burglar (4)</a></li>
-              <li><a @click="output(oddTables.npcThief(5));">Cutpurse (5)</a></li>
-              <li><a @click="output(oddTables.npcThief(6));">Sharper (6)</a></li>
-              <li><a @click="output(oddTables.npcThief(7));">Pilferer (7)</a></li>
-              <li><a @click="output(oddTables.npcThief(8));">Master Pilferer (8)</a></li>
-              <li><a @click="output(oddTables.npcThief(9));">Thief (9)</a></li>
-              <li><a @click="output(oddTables.npcThief(10));">Master Thief (10)</a></li>
-              <li><a @click="output(oddTables.npcThief(11));">Master Thief (11)</a></li>
-              <li><a @click="output(oddTables.npcThief(12));">Master Thief (12)</a></li>
+              <li><a @click="output(npcThief(1));">Apprentice (1)</a></li>
+              <li><a @click="output(npcThief(2));">Footpad (2)</a></li>
+              <li><a @click="output(npcThief(3));">Robber (3)</a></li>
+              <li><a @click="output(npcThief(4));">Burglar (4)</a></li>
+              <li><a @click="output(npcThief(5));">Cutpurse (5)</a></li>
+              <li><a @click="output(npcThief(6));">Sharper (6)</a></li>
+              <li><a @click="output(npcThief(7));">Pilferer (7)</a></li>
+              <li><a @click="output(npcThief(8));">Master Pilferer (8)</a></li>
+              <li><a @click="output(npcThief(9));">Thief (9)</a></li>
+              <li><a @click="output(npcThief(10));">Master Thief (10)</a></li>
+              <li><a @click="output(npcThief(11));">Master Thief (11)</a></li>
+              <li><a @click="output(npcThief(12));">Master Thief (12)</a></li>
             </ul>
           </div>
 
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(oddTables.npcCleric(dice.d10()));">Cleric</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(npcCleric(d10()));">Cleric</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(oddTables.npcCleric(1));">Acolyte (1)</a></li>
-              <li><a @click="output(oddTables.npcCleric(2));">Adept (2)</a></li>
-              <li><a @click="output(oddTables.npcCleric(3));">Priest (3)</a></li>
-              <li><a @click="output(oddTables.npcCleric(4));">Vicar (4)</a></li>
-              <li><a @click="output(oddTables.npcCleric(5));">Curate (5)</a></li>
-              <li><a @click="output(oddTables.npcCleric(6));">Bishop (6)</a></li>
-              <li><a @click="output(oddTables.npcCleric(7));">Lama (7)</a></li>
-              <li><a @click="output(oddTables.npcCleric(8));">Patriarch (8)</a></li>
-              <li><a @click="output(oddTables.npcCleric(9));">Patriarch (9)</a></li>
-              <li><a @click="output(oddTables.npcCleric(10));">Patriarch (10)</a></li>
-              <li><a @click="output(oddTables.npcCleric(11));">Patriarch (11)</a></li>
-              <li><a @click="output(oddTables.npcCleric(12));">Patriarch (12)</a></li>
+              <li><a @click="output(npcCleric(1));">Acolyte (1)</a></li>
+              <li><a @click="output(npcCleric(2));">Adept (2)</a></li>
+              <li><a @click="output(npcCleric(3));">Priest (3)</a></li>
+              <li><a @click="output(npcCleric(4));">Vicar (4)</a></li>
+              <li><a @click="output(npcCleric(5));">Curate (5)</a></li>
+              <li><a @click="output(npcCleric(6));">Bishop (6)</a></li>
+              <li><a @click="output(npcCleric(7));">Lama (7)</a></li>
+              <li><a @click="output(npcCleric(8));">Patriarch (8)</a></li>
+              <li><a @click="output(npcCleric(9));">Patriarch (9)</a></li>
+              <li><a @click="output(npcCleric(10));">Patriarch (10)</a></li>
+              <li><a @click="output(npcCleric(11));">Patriarch (11)</a></li>
+              <li><a @click="output(npcCleric(12));">Patriarch (12)</a></li>
             </ul>
           </div>
 
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(oddTables.npcWizard(dice.d10()));">Magic-User</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(npcWizard(d10()));">Magic-User</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(oddTables.npcWizard(1));">Medium (1)</a></li>
-              <li><a @click="output(oddTables.npcWizard(2));">Seer (2)</a></li>
-              <li><a @click="output(oddTables.npcWizard(3));">Conjurer (3)</a></li>
-              <li><a @click="output(oddTables.npcWizard(4));">Theurgist (4)</a></li>
-              <li><a @click="output(oddTables.npcWizard(5));">Thaumaturgist (5)</a></li>
-              <li><a @click="output(oddTables.npcWizard(6));">Magician (6)</a></li>
-              <li><a @click="output(oddTables.npcWizard(7));">Enchanter (7)</a></li>
-              <li><a @click="output(oddTables.npcWizard(8));">Warlock (8)</a></li>
-              <li><a @click="output(oddTables.npcWizard(9));">Sorcerer (9)</a></li>
-              <li><a @click="output(oddTables.npcWizard(10));">Necromancer (10)</a></li>
-              <li><a @click="output(oddTables.npcWizard(11));">Wizard (11)</a></li>
-              <li><a @click="output(oddTables.npcWizard(12));">Wizard (12)</a></li>
+              <li><a @click="output(npcWizard(1));">Medium (1)</a></li>
+              <li><a @click="output(npcWizard(2));">Seer (2)</a></li>
+              <li><a @click="output(npcWizard(3));">Conjurer (3)</a></li>
+              <li><a @click="output(npcWizard(4));">Theurgist (4)</a></li>
+              <li><a @click="output(npcWizard(5));">Thaumaturgist (5)</a></li>
+              <li><a @click="output(npcWizard(6));">Magician (6)</a></li>
+              <li><a @click="output(npcWizard(7));">Enchanter (7)</a></li>
+              <li><a @click="output(npcWizard(8));">Warlock (8)</a></li>
+              <li><a @click="output(npcWizard(9));">Sorcerer (9)</a></li>
+              <li><a @click="output(npcWizard(10));">Necromancer (10)</a></li>
+              <li><a @click="output(npcWizard(11));">Wizard (11)</a></li>
+              <li><a @click="output(npcWizard(12));">Wizard (12)</a></li>
             </ul>
           </div>
         </div>
@@ -271,6 +271,7 @@ import oddMagicSwords from '../assets/odd/oddMagicSwords.js'
 import oddMagicItems from '../assets/odd/oddMagicItems.js'
 import oddWildernessEncounters from '../assets/odd/oddWildernessEncounters.js'
 import oddTreasureTables from '../assets/odd/oddTreasureTables.js'
+import oddNPCs from '../assets/odd/oddNPCs.js'
 
 export default {
   name: 'hello',
@@ -291,7 +292,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       Object.keys(this.$store.state.party.characters).forEach((char) => {
-        console.log(this.$store.state.party.characters[char])
+        // console.log(this.$store.state.party.characters[char])
         this.$store.state.party.characters[char].abilities = rollAbilities()
       })
     })
@@ -313,6 +314,7 @@ export default {
     ...oddMagicItems,
     ...oddWildernessEncounters,
     ...oddTreasureTables,
+    ...oddNPCs,
   },
 }
 
