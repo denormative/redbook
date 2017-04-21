@@ -1,3 +1,4 @@
+/* @flow */
 /*
  * This is free and unencumbered software released into the public domain.
  *
@@ -69,12 +70,12 @@ function npcGender() {
   return "F"
 }
 
-function npcFighter(levelArg, alignmentArg) {
-  let alignment = alignmentArg
-  let level = Math.floor((typeof levelArg === "number") ? levelArg : 1)
+function npcFighter(levelArg: number = 1, alignmentArg: string = "") {
+  let level = Math.floor(levelArg)
   level = (level < 1 ? 1 : level)
 
   // randomly pick basics
+  let alignment = alignmentArg
   if (!(alignment === "L" || alignment === "N" || alignment === "C")) {
     alignment = npcAlignment()
   }
@@ -211,12 +212,12 @@ function npcFighter(levelArg, alignmentArg) {
   return output
 }
 
-function npcDwarf(levelArg, alignmentArg) {
-  let level = Math.floor((typeof levelArg === "number") ? levelArg : 1)
+function npcDwarf(levelArg: number = 1, alignmentArg: string = "") {
+  let level = Math.floor(levelArg)
   level = (level < 1 ? 1 : level)
 
-  let alignment = alignmentArg
   // randomly pick basics
+  let alignment = alignmentArg
   if (!(alignment === "L" || alignment === "N" || alignment === "C")) {
     alignment = "L"
   }
@@ -332,12 +333,12 @@ function npcDwarf(levelArg, alignmentArg) {
   return output
 }
 
-function npcHalfling(levelArg, alignmentArg) {
-  let level = Math.floor((typeof levelArg === "number") ? levelArg : 1)
+function npcHalfling(levelArg: number = 1, alignmentArg: string = "") {
+  let level = Math.floor(levelArg)
   level = (level < 1 ? 1 : level)
 
-  let alignment = alignmentArg
   // randomly pick basics
+  let alignment = alignmentArg
   if (!(alignment === "L" || alignment === "N" || alignment === "C")) {
     alignment = "L"
   }
@@ -443,12 +444,12 @@ function npcHalfling(levelArg, alignmentArg) {
   return output
 }
 
-function npcThief(levelArg, alignmentArg) {
-  let level = Math.floor((typeof levelArg === "number") ? levelArg : 1)
+function npcThief(levelArg: number = 1, alignmentArg: string = "") {
+  let level = Math.floor(levelArg)
   level = (level < 1 ? 1 : level)
 
-  let alignment = alignmentArg
   // randomly pick basics
+  let alignment = alignmentArg
   if (!(alignment === "L" || alignment === "N" || alignment === "C")) {
     alignment = npcAlignment()
   }
@@ -587,8 +588,8 @@ function npcThief(levelArg, alignmentArg) {
   return output
 }
 
-function npcCleric(levelArg, alignmentArg) {
-  let level = Math.floor((typeof levelArg === "number") ? levelArg : 1)
+function npcCleric(levelArg: number = 1, alignmentArg: string = "") {
+  let level = Math.floor(levelArg)
   level = (level < 1 ? 1 : level)
 
   // randomly pick basics
@@ -759,14 +760,14 @@ function npcCleric(levelArg, alignmentArg) {
   if (sword) {
     output += `${sword}\n`
   }
-  output += `spellbook: ${spells.join("\n")}\n`
+  output += `Spellbook: ${spells.join("\n")}\n`
   output = output.trim()
   output += "\n"
   return output
 }
 
-function npcWizard(levelArg, alignmentArg) {
-  let level = Math.floor((typeof levelArg === "number") ? levelArg : 1)
+function npcWizard(levelArg: number = 1, alignmentArg: string = "") {
+  let level = Math.floor(levelArg)
   level = (level < 1 ? 1 : level)
 
   // randomly pick basics
@@ -958,7 +959,7 @@ function npcWizard(levelArg, alignmentArg) {
   // generate magic items
   let sword
   let ringItem
-  let miscItem
+  let miscItem = ""
   if (percentChance(level * 5)) {
     sword = wand()
   }
@@ -995,20 +996,20 @@ function npcWizard(levelArg, alignmentArg) {
   if (ringItem) {
     output += `${ringItem}\n`
   }
-  if (miscItem > 0) {
+  if (miscItem !== "") {
     output += `${miscItem}\n`
   }
   if (sword) {
     output += `${sword}\n`
   }
-  output += `spellbook: ${spells.join("\n")}\n`
+  output += `Spellbook: ${spells.join("\n")}\n`
   output = output.trim()
   output += "\n"
   return output
 }
 
-function npcElf(levelArg, alignmentArg) {
-  let level = Math.floor((typeof levelArg === "number") ? levelArg : 1)
+function npcElf(levelArg: number = 1, alignmentArg: string = "") {
+  let level = Math.floor(levelArg)
   level = (level < 1 ? 1 : level)
 
   // randomly pick basics
@@ -1115,7 +1116,7 @@ function npcElf(levelArg, alignmentArg) {
   // generate magic items
   let sword
   let ringItem
-  let miscItem
+  let miscItem = ""
   if (percentChance(level * 5)) {
     sword = wand()
   }
@@ -1152,13 +1153,13 @@ function npcElf(levelArg, alignmentArg) {
   if (ringItem) {
     output += `${ringItem}\n`
   }
-  if (miscItem > 0) {
+  if (miscItem !== "") {
     output += `${miscItem}\n`
   }
   if (sword) {
     output += `${sword}\n`
   }
-  output += `spellbook: ${spells.join("\n")}\n`
+  output += `Spellbook: ${spells.join("\n")}\n`
   output = output.trim()
   output += "\n"
   return output

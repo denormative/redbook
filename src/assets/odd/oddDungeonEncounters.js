@@ -1,5 +1,5 @@
+/* @flow */
 /* eslint default-case: "off" */
-/* eslint consistent-return: "off" */
 // FIXME: remove the above eventually
 /*
  * This is free and unencumbered software released into the public domain.
@@ -36,32 +36,34 @@ function monsterLevel1() {
   // return pick(["Kobolds", "Goblins", "Skeletons", "Orcs", "Giant Rats",
   //   "Centipedes", "Bandits", "Spiders"]);
   switch (d8()) {
-    case 1: return oddMonsters.kobold.toString()
-    case 2: return oddMonsters.goblin.toString()
-    case 3: return oddMonsters.skeleton.toString()
-    case 4: return oddMonsters.orc.toString()
-    case 5: return oddMonsters.giantRat.toString()
-    case 6: return oddMonsters.centipede.toString()
-    case 7: return oddMonsters.bandit.toString()
-    case 8: return oddMonsters.giantSpider.toString()
+    case 1: return oddMonsters.kobold.toS()
+    case 2: return oddMonsters.goblin.toS()
+    case 3: return oddMonsters.skeleton.toS()
+    case 4: return oddMonsters.orc.toS()
+    case 5: return oddMonsters.giantRat.toS()
+    case 6: return oddMonsters.centipede.toS()
+    case 7: return oddMonsters.bandit.toS()
+    case 8: return oddMonsters.giantSpider.toS()
   }
+  return ""
 }
 
 function monsterLevel2() {
   // return pick(["Hobgoblins", "Zombies", "Lizards", "Warriors", "Conjurers",
   //   "Gnolls", "Thouls", "Ghouls", "Berserkers", "Theurgists"]);
   switch (d10()) {
-    case 1: return oddMonsters.hobgoblin.toString()
-    case 2: return oddMonsters.zombie.toString()
-    case 3: return oddMonsters.giantLizard.toString()
+    case 1: return oddMonsters.hobgoblin.toS()
+    case 2: return oddMonsters.zombie.toS()
+    case 3: return oddMonsters.giantLizard.toS()
     case 4: return "warriors"
     case 5: return "conjurers"
-    case 6: return oddMonsters.gnoll.toString()
-    case 7: return oddMonsters.ghoul.toString()
-    case 8: return oddMonsters.ghoul.toString()
-    case 9: return oddMonsters.berserker.toString()
+    case 6: return oddMonsters.gnoll.toS()
+    case 7: return oddMonsters.ghoul.toS()
+    case 8: return oddMonsters.ghoul.toS()
+    case 9: return oddMonsters.berserker.toS()
     case 10: return "theurgists"
   }
+  return ""
 }
 
 function monsterLevel3() {
@@ -69,17 +71,18 @@ function monsterLevel3() {
   //   "Thaumaturgists", "Swashbucklers", "Magicians", "Giant Snakes",
   //   "Giant Weasles"]);
   switch (d10()) {
-    case 1: return oddMonsters.wight.toString()
+    case 1: return oddMonsters.wight.toS()
     case 2: return "heroes"
-    case 3: return oddMonsters.giantHog.toString()
-    case 4: return oddMonsters.giantAnt.toString()
-    case 5: return oddMonsters.ochreJelly.toString()
+    case 3: return oddMonsters.giantHog.toS()
+    case 4: return "Giant Ants"
+    case 5: return oddMonsters.ochreJelly.toS()
     case 6: return "thaumaturgists"
     case 7: return "Swashbucklers"
     case 8: return "magicians"
-    case 9: return oddMonsters.giantSnake.toString()
-    case 10: return oddMonsters.giantWeasel.toString()
+    case 9: return oddMonsters.giantSnake.toS()
+    case 10: return oddMonsters.giantWeasel.toS()
   }
+  return ""
 }
 
 function monsterLevel4() {
@@ -87,17 +90,18 @@ function monsterLevel4() {
   //   "Giant Beetles", "Giant Scorpions", "Lycanthropes", "Gargoyles",
   //   "White Apes", "Enchanters"]);
   switch (d10()) {
-    case 1: return oddMonsters.wraith.toString()
-    case 2: return oddMonsters.ogre.toString()
+    case 1: return oddMonsters.wraith.toS()
+    case 2: return oddMonsters.ogre.toS()
     case 3: return "evil priests"
     case 4: return "myrmidons"
-    case 5: return oddMonsters.giantBeetle.toString()
-    case 6: return oddMonsters.giantScorpion.toString()
+    case 5: return oddMonsters.giantBeetle.toS()
+    case 6: return oddMonsters.giantScorpion.toS()
     case 7: return "Lycanthropes"
-    case 8: return oddMonsters.gargoyle.toString()
-    case 9: return oddMonsters.whiteApe.toString()
+    case 8: return oddMonsters.gargoyle.toS()
+    case 9: return oddMonsters.whiteApe.toS()
     case 10: return "enchanters"
   }
+  return ""
 }
 
 function monsterLevel5() {
@@ -105,19 +109,20 @@ function monsterLevel5() {
   //   "Minotaurs", "Manticores", "Cockatrices", "Sorcerers", "Wyverns",
   //   "Hydra (6-8 Heads)", "Medusae"]);
   switch (d12()) {
-    case 1: return oddMonsters.troll.toString()
+    case 1: return oddMonsters.troll.toS()
     case 2: return "Superheros"
-    case 3: return oddMonsters.wyvern.toString()
-    case 4: return oddMonsters.spectre.toString()
-    case 5: return oddMonsters.mummy.toString()
-    case 6: return oddMonsters.minotaur.toString()
-    case 7: return oddMonsters.manticore.toString()
-    case 8: return oddMonsters.cockatrice.toString()
+    case 3: return oddMonsters.wyvern.toS()
+    case 4: return oddMonsters.spectre.toS()
+    case 5: return oddMonsters.mummy.toS()
+    case 6: return oddMonsters.minotaur.toS()
+    case 7: return oddMonsters.manticore.toS()
+    case 8: return oddMonsters.cockatrice.toS()
     case 9: return "Sorcerers"
-    case 10: return oddMonsters.wyvern.toString()
-    case 11: return `${d3() + 5}-headed ${oddMonsters.hydra.toString()}`
-    case 12: return oddMonsters.medusa.toString()
+    case 10: return oddMonsters.wyvern.toS()
+    case 11: return `${d3() + 5}-headed ${oddMonsters.hydra.toS()}`
+    case 12: return oddMonsters.medusa.toS()
   }
+  return ""
 }
 
 function monsterLevel6() {
@@ -126,18 +131,19 @@ function monsterLevel6() {
   //   "Evil High Priests*", "Purple Worms"]);
   switch (d12()) {
     case 1: return "giants"
-    case 2: return `${d4() + 8}-headed ${oddMonsters.hydra.toString()}`
+    case 2: return `${d4() + 8}-headed ${oddMonsters.hydra.toS()}`
     case 3: return "dragons"
-    case 4: return oddMonsters.basilisk.toString()
-    case 5: return oddMonsters.gorgon.toString()
-    case 6: return oddMonsters.chimera.toString()
-    case 7: return oddMonsters.vampire.toString()
+    case 4: return oddMonsters.basilisk.toS()
+    case 5: return oddMonsters.gorgon.toS()
+    case 6: return oddMonsters.chimera.toS()
+    case 7: return oddMonsters.vampire.toS()
     case 8: return "Lords"
-    case 9: return oddMonsters.balrogs.toString()
+    case 9: return oddMonsters.balrog.toS()
     case 10: return "Wizards"
     case 11: return "Evil High Priests"
-    case 12: return oddMonsters.purpleWorm.toString()
+    case 12: return oddMonsters.purpleWorm.toS()
   }
+  return ""
 }
 
 function dungeonLevel1() {
@@ -149,6 +155,7 @@ function dungeonLevel1() {
     case 5: return `${Math.round(d6() / 4)} ${monsterLevel3()}`
     case 6: return `1 ${monsterLevel4()}`
   }
+  return ""
 }
 
 function dungeonLevel2() {
@@ -160,6 +167,7 @@ function dungeonLevel2() {
     case 5: return `${Math.round(d6() / 4)} ${monsterLevel4()}`
     case 6: return `1 ${monsterLevel5()}`
   }
+  return ""
 }
 
 function dungeonLevel3() {
@@ -171,6 +179,7 @@ function dungeonLevel3() {
     case 5: return `${Math.round(d6() / 4)} ${monsterLevel5()}`
     case 6: return `1 ${monsterLevel6()}`
   }
+  return ""
 }
 
 function dungeonLevel4to5() {
@@ -182,6 +191,7 @@ function dungeonLevel4to5() {
     case 5: return `${Math.round(d6() / 2)} ${monsterLevel5()}`
     case 6: return `${Math.round(d6() / 4)} ${monsterLevel6()}`
   }
+  return ""
 }
 
 function dungeonLevel6to7() {
@@ -193,6 +203,7 @@ function dungeonLevel6to7() {
     case 5:
     case 6: return `${Math.round(d6() / 2)} ${monsterLevel6()}`
   }
+  return ""
 }
 
 function dungeonLevel8to9() {
@@ -204,6 +215,7 @@ function dungeonLevel8to9() {
     case 5:
     case 6: return `${d6()} ${monsterLevel6()}`
   }
+  return ""
 }
 
 function dungeonLevel10to12() {
@@ -215,6 +227,7 @@ function dungeonLevel10to12() {
     case 5:
     case 6: return `${d6()} ${monsterLevel6()}`
   }
+  return ""
 }
 
 function dungeonLevel13() {

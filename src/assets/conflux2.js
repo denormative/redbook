@@ -1,3 +1,4 @@
+/* @flow */
 /*
 * This is free and unencumbered software released into the public domain.
 *
@@ -34,7 +35,7 @@ function Confluxor() {
   this.generated = []
 }
 
-function ConfluxorPair(letters, successor) {
+function ConfluxorPair(letters: string, successor: string) {
   this.letters = letters
   this.successor = [successor]
 }
@@ -45,7 +46,7 @@ ConfluxorPair.prototype.addSuccessor = function addSuccessor(successor) {
   }
 }
 
-ConfluxorPair.prototype.toString = function toString() {
+;(ConfluxorPair.prototype: any).toString = function toString() {
   return `{${this.letters}:${this.successor.join(",")}}`
 }
 

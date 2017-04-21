@@ -1,3 +1,4 @@
+/* @flow */
 /*
  * This is free and unencumbered software released into the public domain.
  *
@@ -114,7 +115,7 @@ function spellAny() {
   return spellMuAny()
 }
 
-function spellBookMu(level, numSpells) {
+function spellBookMu(level: number, numSpells: number) {
   const spells = []
   let spellArray
   switch (level) {
@@ -135,7 +136,7 @@ function spellBookMu(level, numSpells) {
   return spells.sort()
 }
 
-function spellBookClr(level, numSpells) {
+function spellBookClr(level: number, numSpells: number) {
   const spells = []
   let spellArray
   switch (level) {
@@ -155,7 +156,7 @@ function spellBookClr(level, numSpells) {
   return spells.sort()
 }
 
-function spellBookEvil(level, numSpells) {
+function spellBookEvil(level: number, numSpells: number) {
   const spells = []
   let spellArray
   switch (level) {

@@ -1,3 +1,4 @@
+/* @flow */
 /*
  * This is free and unencumbered software released into the public domain.
  *
@@ -26,7 +27,7 @@
  */
 
 import { d4, d6, d8, d10, d100 } from '../dice.js'
-import { magicItem, magicItemNoSwords, potion } from './oddMagicItems.js'
+import { magicItem, magicItemNoSwords, potion, scroll } from './oddMagicItems.js'
 
 function gemValue() {
   let baseIndex
@@ -91,9 +92,8 @@ function gemValue() {
 //   return result;
 // };
 
-function gems(numberArg) {
-  let number = (typeof numberArg === "number") ? numberArg : 1
-  number = (number < 1) ? 1 : number
+function gems(numberArg?: number = 1) {
+  let number = (numberArg < 1) ? 1 : numberArg
   // let items = []
   const groups = []
   let result = ""
@@ -128,11 +128,10 @@ function gems(numberArg) {
   return result
 }
 
-function jewelry(numberArg) {
+function jewelry(numberArg?: number = 1) {
   let roll
   let val
-  let number = (typeof numberArg === "number") ? numberArg : 1
-  number = (number < 1) ? 1 : number
+  let number = (numberArg < 1) ? 1 : numberArg
   // let items = []
   const groups = []
   let result = ""

@@ -1,3 +1,4 @@
+/* @flow */
 /* eslint default-case: "off" */
 /* eslint consistent-return: "off" */
 // FIXME: remove the above eventually

@@ -1,3 +1,4 @@
+/* @flow */
 /*
  * This is free and unencumbered software released into the public domain.
  *
@@ -290,6 +291,10 @@ function treasureTypeI() {
   return result
 }
 
+function treasureTypeNil() {
+  return ""
+}
+
 // treasure table II
 function treasureLevel1() {
   let result = "Level 1 Treasure"
@@ -422,6 +427,7 @@ const oddTreasureTables = {
   treasureTypeG,
   treasureTypeH,
   treasureTypeI,
+  treasureTypeNil,
   treasureLevel1,
   treasureLevel2to3,
   treasureLevel4to5,

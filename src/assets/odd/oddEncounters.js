@@ -1,3 +1,4 @@
+/* @flow */
 /*
  * This is free and unencumbered software released into the public domain.
  *
@@ -298,7 +299,7 @@ function orcs() {
   let lair
   if (d6() >= 5) {
     lair = "village"
-    if (d100 <= ((25 * numberEncountered) / 10)) {
+    if (d100() <= ((25 * numberEncountered) / 10)) {
       switch (d6()) {
         case 1: fighters.push(7)
           break

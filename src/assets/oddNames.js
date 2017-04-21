@@ -1,3 +1,4 @@
+/* @flow */
 /*
  * This is free and unencumbered software released into the public domain.
  *
@@ -46,7 +47,7 @@ const oddNames = {
     return `the ${pick(epithets)}`
   },
   placePrefix () {
-    return pick("Aelf", "Ald", "Ash", "Axe", "Barrow", "Bear", "Bee", "Black",
+    return pick(["Aelf", "Ald", "Ash", "Axe", "Barrow", "Bear", "Bee", "Black",
       "Blue", "Breeze", "Bryn", "Byrn", "Cant", "Caribou", "Cedar", "Claw", "Cloud",
       "Coal", "Cold", "Copper", "Crow", "Dark", "Dawn", "Dead", "Deer", "Down",
       "Dusk", "Dverg", "Dwarf", "Eagle", "East", "Elf", "Even", "Fair", "Far",
@@ -61,7 +62,7 @@ const oddNames = {
       "Shep", "Shield", "Sig", "Silver", "Small", "Smoke", "South", "Spear",
       "Spruce", "Stan", "Star", "Stone", "Storm", "Sun", "Sword", "Sæx", "Tern",
       "Thorn", "Tin", "Tooth", "Troll", "Up", "Urd", "Wald", "Warm", "West", "Whale",
-      "White", "Willow", "Woad", "Wolf", "Wood", "Wool", "Wyrm", "Yew", "Yng", "Young")
+      "White", "Willow", "Woad", "Wolf", "Wood", "Wool", "Wyrm", "Yew", "Yng", "Young"])
   },
   castleName() {
     return oddNames.placePrefix() +

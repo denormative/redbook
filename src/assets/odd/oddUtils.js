@@ -1,3 +1,4 @@
+/* @flow */
 /*
  * This is free and unencumbered software released into the public domain.
  *
@@ -51,9 +52,8 @@ function characterStats() {
   return output
 }
 
-function reaction(modifier) {
-  let result = d6(2)
-  result += (typeof modifier === "number") ? modifier : 0
+function reaction(modifier?: number = 0) {
+  const result = d6(2) + modifier
   if (result <= 2) {
     return `Reaction Roll (${result}): Attempts to attack`
   }
@@ -69,9 +69,8 @@ function reaction(modifier) {
   return `Reaction Roll (${result}): Enthusiast, Loyalty +3`
 }
 
-function loyalty(modifier) {
-  let result = d6(2)
-  result += (typeof modifier === "number") ? modifier : 0
+function loyalty(modifier?: number = 0) {
+  const result = d6(2) + modifier
   if (result <= 3) {
     return `Loyalty (${result}): Will desert at first opportunity`
   }

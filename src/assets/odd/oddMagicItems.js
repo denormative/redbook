@@ -1,3 +1,4 @@
+/* @flow */
 /*
  * This is free and unencumbered software released into the public domain.
  *
@@ -115,7 +116,7 @@ function miscWeapon() {
   return "Spear +3"
 }
 
-function potion(verbose) {
+function potion(verbose?: boolean) {
   let result
   result = ""
   if (typeof verbose !== "undefined" && verbose) {
@@ -132,9 +133,8 @@ function potion(verbose) {
   return result
 }
 
-function spellScroll(numberArg) {
+function spellScroll(number?: number = 1) {
   let result = "Spell Scroll ("
-  const number = (typeof numberArg === "number") ? numberArg : 1
   for (let i = 0; i < number; i++) {
     result += spellMuAny()
     if (i <= number) {
@@ -191,7 +191,7 @@ function scroll() {
   return "Scroll of Protection: Magic"
 }
 
-function ring(verbose) {
+function ring(verbose?: boolean) {
   let result = ""
   if (typeof verbose !== "undefined" && verbose) {
     result += "Ring of "
