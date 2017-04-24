@@ -27,7 +27,7 @@
  */
 
 import { d3, d4, d6, d8, d10, d12, d20, d100, flip, percentChance } from '../dice.js'
-import oddNames from '../oddNames.js'
+import oddNames from '../names/oddNames.js'
 import { spellBookMu, spellBookClr, spellBookEvil } from './oddSpells.js'
 import { armorOnly, shieldOnly, wand, miscMagic, clericItem, ring } from './oddMagicItems.js'
 import { magicSword } from './oddMagicSwords.js'

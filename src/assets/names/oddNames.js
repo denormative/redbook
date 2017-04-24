@@ -30,7 +30,7 @@ import { Confluxor } from './conflux2.js'
 import feminineCensusNames from './feminine-census-names.js'
 import masculineCensusNames from './masculine-census-names.js'
 import epithets from './epithets.js'
-import { pick } from './dice.js'
+import { pick } from '../dice.js'
 
 
 /* Declare object */
@@ -66,19 +66,19 @@ const oddNames = {
   },
   castleName() {
     return oddNames.placePrefix() +
-      pick("berg", "caer", "castle", "hall", "hearth", "hold", "rock", "tower")
+      pick(["berg", "caer", "castle", "hall", "hearth", "hold", "rock", "tower"])
   },
   townName() {
     return oddNames.placePrefix() +
-      pick("borough", "burg", "burgh", "bury", "don", "haven", "ington", "ston", "town", "wall")
+      pick(["borough", "burg", "burgh", "bury", "don", "haven", "ington", "ston", "town", "wall"])
   },
   villageName() {
     return oddNames.placePrefix() +
-      pick("gate", "field", "holm", "ley", "spring", "stead", "sted", "vale", "ville", "worth", "wich")
+      pick(["gate", "field", "holm", "ley", "spring", "stead", "sted", "vale", "ville", "worth", "wich"])
   },
   hamletName() {
     return oddNames.placePrefix() +
-      pick("ald", "back", "croft", "cote", "heath", "ham", "ingham", "thorpe", "wald")
+      pick(["ald", "back", "croft", "cote", "heath", "ham", "ingham", "thorpe", "wald"])
   },
 }
 

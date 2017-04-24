@@ -264,7 +264,7 @@ import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 
 import { rollAbilities } from '../vuex/abilities.js'
 import { roll } from '../assets/dice.js'
-import oddNames from '../assets/oddNames.js'
+import oddNames from '../assets/names/oddNames.js'
 import oddUtils from '../assets/odd/oddUtils.js'
 import oddMagicSwords from '../assets/odd/oddMagicSwords.js'
 import oddMagicItems from '../assets/odd/oddMagicItems.js'

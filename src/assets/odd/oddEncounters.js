@@ -27,7 +27,7 @@
  */
 
 import { d2, d3, d4, d6, d10, d100, flip, chanceIn6 } from '../dice.js'
-import oddNames from '../oddNames.js'
+import oddNames from '../names/oddNames.js'
 import oddMonsters from './oddMonsters.js'
 import { npcFighter, npcWizard, npcCleric } from './oddNPCs.js'
 import oddTreasureTables from './oddTreasureTables.js'
