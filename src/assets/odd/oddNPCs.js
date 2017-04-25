@@ -201,7 +201,7 @@ function npcFighter(level: number = 1, alignment: string = "") {
   npc.ac = 2 - npc.armor - npc.shield - abilityMod(npc.dex)
 
   // generate output string
-  return outputNPC(npc)
+  return outputNpc(npc)
 }
 
 function npcDwarf(levelArg: number = 1, alignmentArg: string = "") {
