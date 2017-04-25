@@ -70,16 +70,25 @@ function npcGender() {
   return "F"
 }
 
-function npcFighter(levelArg: number = 1, alignmentArg: string = "") {
-  let level = Math.floor(levelArg)
-  level = (level < 1 ? 1 : level)
-
-  // randomly pick basics
-  let alignment = alignmentArg
-  if (!(alignment === "L" || alignment === "N" || alignment === "C")) {
-    alignment = npcAlignment()
+function rollAbilityScores() {
+  return {
+    str: d6(3),
+    int: d6(3),
+    wis: d6(3),
+    con: d6(3),
+    dex: d6(3),
+    cha: d6(3),
   }
-  const gender = npcGender()
+}
+
+function pickAlignment(alignment: string = "") {
+  if (!(alignment === "L" || alignment === "N" || alignment === "C")) {
+    return npcAlignment()
+  }
+  return alignment
+}
+
+function pickName(gender: string) {
   let name
   if (gender === "M" || (gender === "*" && flip())) {
     name = oddNames.masculineName()
@@ -87,129 +96,112 @@ function npcFighter(levelArg: number = 1, alignmentArg: string = "") {
   else {
     name = oddNames.feminineName()
   }
-  name += oddNames.epithet()
+  return `${name}${oddNames.epithet()}`
+}
 
-  let title
-  let hd = 1
-  let hpBonus = 0
-
-  // determine basic level derivatives
-  switch (level) {
-    case 1:
-      title = "Veteran"
-      hd = 1
-      hpBonus = 1
-      break
-    case 2:
-      title = "Warrior"
-      hd = 2
-      hpBonus = 0
-      break
-    case 3:
-      title = "Swordsman"
-      hd = 3
-      hpBonus = 0
-      break
-    case 4:
-      title = "Hero"
-      hd = 4
-      hpBonus = 0
-      break
-    case 5:
-      title = "Swashbuckler"
-      hd = 5
-      hpBonus = 1
-      break
-    case 6:
-      title = "Myrmidon"
-      hd = 6
-      hpBonus = 0
-      break
-    case 7:
-      title = "Champion"
-      hd = 7
-      hpBonus = 1
-      break
-    case 8:
-      title = "Superhero"
-      hd = 8
-      hpBonus = 2
-      break
-    case 9:
-      title = "Lord"
-      hd = 9
-      hpBonus = 3
-      break
-    default:
-      title = "Lord"
-      hd = 10
-      hpBonus = level - 9
-      break
-  }
-
-  // roll ability scores
-  const aStr = d6(3)
-  const aInt = d6(3)
-  const aWis = d6(3)
-  const aCon = d6(3)
-  const aDex = d6(3)
-  const aCha = d6(3)
-
+function rollHp(npc: { hd: number, hpBonus: number, con: number }) {
   // roll HP
   let hp = 0
-  for (let i = 0; i <= hd; i++) {
-    let roll = d6() + abilityMod(aCon)
+  const conMod = abilityMod(npc.con)
+  for (let i = 0; i <= npc.hd; i++) {
+    let roll = d6() + conMod
     roll = (roll < 1) ? 1 : roll
     hp += roll
   }
-  hp += hpBonus
+  return hp + npc.hpBonus
+}
 
-  let sword
-  let armor = 0
-  let shield = 0
+function outputNpc(npc) {
+  let output = `${npc.title} ${npc.name}\n`
+  output += `${npc.gender} `
+  output += `${npc.alignment} `
+  output += `F${npc.level} `
+  output += `S:${npc.str} `
+  output += `I:${npc.int} `
+  output += `W:${npc.wis} `
+  output += `C:${npc.con} `
+  output += `D:${npc.dex} `
+  output += `X:${npc.cha} `
+  output += `HP:${npc.hp} `
+  output += `AC:${npc.ac} `
+  output += "\n"
+  if (npc.armor > 0) {
+    output += `Armor +${npc.armor}\n`
+  }
+  if (npc.shield > 0) {
+    output += `Shield +${npc.shield}\n`
+  }
+  if (npc.sword) {
+    output += npc.sword
+  }
+  return `${output.trim()}\n`
+}
+
+function newNpc(level: number = 1, alignment: string = "") {
+  const npc = {
+    title: "",
+    hd: 1,
+    hpBonus: 0,
+    level: level < 1 ? 1 : Math.floor(level),
+    alignment: pickAlignment(alignment),
+    gender: npcGender(),
+    name: undefined,
+    ...rollAbilityScores(),
+    hp: 0,
+    sword: "",
+    armor: 0,
+    shield: 0,
+    ac: undefined,
+  }
+  npc.name = pickName(npc.gender)
+
+  return npc
+}
+
+function npcFighter(level: number = 1, alignment: string = "") {
+  let npc = newNpc(level, alignment)
+
+  if (npc.level <= 9) {
+    npc = {
+      ...[
+        { title: "Veteran", hd: 1, hpBonus: 1 },
+        { title: "Warrior", hd: 2, hpBonus: 0 },
+        { title: "Swordsman", hd: 3, hpBonus: 0 },
+        { title: "Hero", hd: 4, hpBonus: 0 },
+        { title: "Swashbuckler", hd: 5, hpBonus: 1 },
+        { title: "Myrmidon", hd: 6, hpBonus: 0 },
+        { title: "Champion", hd: 7, hpBonus: 1 },
+        { title: "Superhero", hd: 8, hpBonus: 2 },
+        { title: "Lord", hd: 9, hpBonus: 3 },
+      ][npc.level - 1],
+      ...npc,
+    }
+  }
+  else {
+    npc = { title: "Lord", hd: 10, hpBonus: npc.level - 9, ...npc }
+  }
+
+  npc.hp = rollHp(npc)
+
   // generate magic items
-  if (percentChance(level * 5)) {
-    sword = magicSword()
+  if (percentChance(npc.level * 5)) {
+    npc.sword = magicSword()
   }
-  if (percentChance(level * 5)) {
-    armor = armorOnly()
+  if (percentChance(npc.level * 5)) {
+    npc.armor = armorOnly()
   }
-  if (percentChance(level * 5)) {
-    shield = shieldOnly()
+  if (percentChance(npc.level * 5)) {
+    npc.shield = shieldOnly()
   }
   // OED version: sword, armor(+shield?), potion, misc.
   // default to +1, then half chance to increase by 1, repeating
 
   // calculate AC
   // assume plate & shield for base AC 2
-  const ac = 2 - armor - shield - abilityMod(aDex)
+  npc.ac = 2 - npc.armor - npc.shield - abilityMod(npc.dex)
 
   // generate output string
-  let output = `${title} ${name}\n`
-  output += `${gender} `
-  output += `${alignment} `
-  output += `F${level} `
-  output += `S:${aStr} `
-  output += `I:${aInt} `
-  output += `W:${aWis} `
-  output += `C:${aCon} `
-  output += `D:${aDex} `
-  output += `X:${aCha} `
-  output += `HP:${hp} `
-  output += `AC:${ac} `
-  output += "\n"
-  if (armor > 0) {
-    output += `Armor +${armor}\n`
-  }
-  if (shield > 0) {
-    output += `Shield +${shield}\n`
-  }
-  if (sword) {
-    output += sword
-  }
-  output = output.trim()
-  output += "\n"
-  return output
+  return outputNPC(npc)
 }
 
 function npcDwarf(levelArg: number = 1, alignmentArg: string = "") {
