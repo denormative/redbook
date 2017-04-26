@@ -129,10 +129,13 @@ function outputNpc(npc) {
   output += `AC:${npc.ac} `
   output += "\n"
   if (npc.armor > 0) {
-    output += `Armor +${npc.armor}\n`
+    output += `${npc.armourType} Armor +${npc.armor}\n`
   }
   if (npc.shield > 0) {
     output += `Shield +${npc.shield}\n`
+  }
+  if (npc.ring) {
+    output += `${npc.ring}\n`
   }
   if (npc.sword) {
     output += npc.sword
@@ -140,7 +143,7 @@ function outputNpc(npc) {
   return `${output.trim()}\n`
 }
 
-function newNpc(klass: string = "", level: number = 1) {
+function newNpc(klass: string = "", level: number = 1, armourType: string) {
   const npc = {
     title: "",
     class: klass,
@@ -153,7 +156,9 @@ function newNpc(klass: string = "", level: number = 1) {
     ...rollAbilityScores(),
     hp: 0,
     sword: "",
+    ring: "",
     armor: 0,
+    armourType,
     shield: 0,
     ac: undefined,
   }
@@ -163,7 +168,7 @@ function newNpc(klass: string = "", level: number = 1) {
 }
 
 function npcFighter(level: number = 1, alignment: string = "") {
-  let npc = newNpc("F", level)
+  let npc = newNpc("F", level, "Plate")
   npc.alignment = pickAlignment(alignment)
 
   // determine basic level derivatives
@@ -211,7 +216,7 @@ function npcFighter(level: number = 1, alignment: string = "") {
 }
 
 function npcDwarf(levelArg: number = 1, alignmentArg: string = "") {
-  let npc = newNpc("D", levelArg)
+  let npc = newNpc("D", levelArg, "Plate")
   npc.alignment = pickAlignment(alignmentArg, "L")
 
   // determine basic level derivatives
@@ -255,7 +260,7 @@ function npcDwarf(levelArg: number = 1, alignmentArg: string = "") {
 }
 
 function npcHalfling(levelArg: number = 1, alignmentArg: string = "") {
-  let npc = newNpc("H", levelArg)
+  let npc = newNpc("H", levelArg, "Plate")
   npc.alignment = pickAlignment(alignmentArg, "L")
 
   // determine basic level derivatives
@@ -297,147 +302,52 @@ function npcHalfling(levelArg: number = 1, alignmentArg: string = "") {
 }
 
 function npcThief(levelArg: number = 1, alignmentArg: string = "") {
-  let level = Math.floor(levelArg)
-  level = (level < 1 ? 1 : level)
+  let npc = newNpc("T", levelArg, "Leather")
+  npc.alignment = pickAlignment(alignmentArg)
 
-  // randomly pick basics
-  let alignment = alignmentArg
-  if (!(alignment === "L" || alignment === "N" || alignment === "C")) {
-    alignment = npcAlignment()
-  }
-  const gender = npcGender()
-  let name
-  if (gender === "M" || (gender === "*" && flip())) {
-    name = oddNames.masculineName()
+  // determine basic level derivatives
+  if (npc.level <= 9) {
+    npc = {
+      ...[
+        { title: "Apprentice", hd: 1, hpBonus: 0 },
+        { title: "Footpad", hd: 2, hpBonus: 0 },
+        { title: "Robber", hd: 3, hpBonus: 0 },
+        { title: "Burglar", hd: 3, hpBonus: 1 },
+        { title: "Cutpurse", hd: 4, hpBonus: 0 },
+        { title: "Sharper", hd: 4, hpBonus: 1 },
+        { title: "Pilferer", hd: 5, hpBonus: 0 },
+        { title: "Master Pilferer", hd: 6, hpBonus: 0 },
+        { title: "Thief", hd: 7, hpBonus: 0 },
+      ][npc.level - 1],
+      ...npc,
+    }
   }
   else {
-    name = oddNames.feminineName()
-  }
-  name += oddNames.epithet()
-
-  let title
-  let hd = 1
-  let hpBonus = 0
-  // determine basic level derivatives
-  switch (level) {
-    case 1:
-      title = "Apprentice"
-      hd = 1
-      hpBonus = 0
-      break
-    case 2:
-      title = "Footpad"
-      hd = 2
-      hpBonus = 0
-      break
-    case 3:
-      title = "Robber"
-      hd = 3
-      hpBonus = 0
-      break
-    case 4:
-      title = "Burglar"
-      hd = 3
-      hpBonus = 1
-      break
-    case 5:
-      title = "Cutpurse"
-      hd = 4
-      hpBonus = 0
-      break
-    case 6:
-      title = "Sharper"
-      hd = 4
-      hpBonus = 1
-      break
-    case 7:
-      title = "Pilferer"
-      hd = 5
-      hpBonus = 0
-      break
-    case 8:
-      title = "Master Pilferer"
-      hd = 6
-      hpBonus = 0
-      break
-    case 9:
-      title = "Thief"
-      hd = 7
-      hpBonus = 0
-      break
-    default:
-      title = "Master Thief"
-      hd = 7
-      hpBonus = level - 9
-      break
+    npc = { title: "Master Thief", hd: 7, hpBonus: npc.level - 9, ...npc }
   }
 
-  // roll ability scores
-  const aStr = d6(3)
-  const aInt = d6(3)
-  const aWis = d6(3)
-  const aCon = d6(3)
-  const aDex = d6(3)
-  const aCha = d6(3)
-
-  // roll HP
-  let hp = 0
-  for (let i = 0; i <= hd; i++) {
-    let roll = d6() + abilityMod(aCon)
-    roll = (roll < 1) ? 1 : roll
-    hp += roll
-  }
-  hp += hpBonus
-
-  let sword
-  let armor = 0
-  let ringItem
   // generate magic items
-  if (percentChance(level * 5)) {
-    sword = magicSword()
+  if (percentChance(npc.level * 5)) {
+    npc.sword = magicSword()
   }
-  if (percentChance(level * 5)) {
-    armor = armorOnly()
+  if (percentChance(npc.level * 5)) {
+    npc.armor = armorOnly()
   }
-  if (percentChance(level * 5)) {
-    ringItem = ring(true)
+  if (percentChance(npc.level * 5)) {
+    npc.ring = ring(true)
   }
   // OED version: sword, armor(+shield?), potion, misc.
   // default to +1, then half chance to increase by 1, repeating
 
   // calculate AC
   // assume leather for base AC 7
-  let ac = 7 - armor - abilityMod(aDex)
-  if (ringItem === "Ring of Protection") {
-    ac = 2
+  npc.ac = 7 - npc.armor - abilityMod(npc.dex)
+  if (npc.ring === "Ring of Protection") {
+    npc.ac = 2
   }
 
   // generate output string
-  let output = `${title} ${name}\n`
-  output += `${gender} `
-  output += `${alignment} `
-  output += `T${level} `
-  output += `S:${aStr} `
-  output += `I:${aInt} `
-  output += `W:${aWis} `
-  output += `C:${aCon} `
-  output += `D:${aDex} `
-  output += `X:${aCha} `
-  output += `HP:${hp} `
-  output += `AC:${ac} `
-  output += "\n"
-  if (armor > 0) {
-    output += `Leather Armor +${armor}\n`
-  }
-  if (ringItem) {
-    output += `${ringItem}\n`
-  }
-  if (sword) {
-    output += sword
-  }
-  output = output.trim()
-  output += "\n"
-  return output
+  return outputNpc(npc)
 }
 
 function npcCleric(levelArg: number = 1, alignmentArg: string = "") {
