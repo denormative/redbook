@@ -14,7 +14,7 @@
 
         <h6 class="buttonLabel" data-toggle="collapse" href="#dice-buttons">Special Dice</h6>
         <div id="dice-buttons" class="collapse show">
-          <button class="btn btn-default btn-sm mr-1 " v-for="d in specialRolls" @click="output(multiple(d.n, d.x, d.y));">{{d.n}} x {{ d.x!=1 ? d.x : "" }}d{{d.y}}</button>
+          <button class="btn btn-default btn-sm mr-1 " v-for="d in specialRolls" @click="output(multiple(d.n, d.x, d.y))">{{d.n}} x {{ d.x!=1 ? d.x : "" }}d{{d.y}}</button>
         </div>
 
         <h6 class="buttonLabel" data-toggle="collapse" href="#basic-tables-buttons">Basic Tables</h6>
@@ -47,38 +47,38 @@
           </div>
 
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(treasureTypeA());">Type A Land</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(treasureTypeA())">Type A Land</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(treasureTypeADesert());">Type A Desert</a></li>
-              <li><a @click="output(treasureTypeAWater());">Type A Water</a></li>
-              <li><a @click="output(treasureTypeB());">Type B</a></li>
-              <li><a @click="output(treasureTypeC());">Type C</a></li>
-              <li><a @click="output(treasureTypeD());">Type D</a></li>
-              <li><a @click="output(treasureTypeE());">Type E</a></li>
-              <li><a @click="output(treasureTypeF());">Type F</a></li>
-              <li><a @click="output(treasureTypeG());">Type G</a></li>
-              <li><a @click="output(treasureTypeH());">Type H</a></li>
-              <li><a @click="output(treasureTypeI());">Type I</a></li>
+              <li><a @click="output(treasureTypeADesert())">Type A Desert</a></li>
+              <li><a @click="output(treasureTypeAWater())">Type A Water</a></li>
+              <li><a @click="output(treasureTypeB())">Type B</a></li>
+              <li><a @click="output(treasureTypeC())">Type C</a></li>
+              <li><a @click="output(treasureTypeD())">Type D</a></li>
+              <li><a @click="output(treasureTypeE())">Type E</a></li>
+              <li><a @click="output(treasureTypeF())">Type F</a></li>
+              <li><a @click="output(treasureTypeG())">Type G</a></li>
+              <li><a @click="output(treasureTypeH())">Type H</a></li>
+              <li><a @click="output(treasureTypeI())">Type I</a></li>
             </ul>
           </div>
 
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(treasureLevel1());">Level 1</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(treasureLevel1())">Level 1</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(treasureLevel2to3());">Level 2-3</a></li>
-              <li><a @click="output(treasureLevel4to5());">Level 4-5</a></li>
-              <li><a @click="output(treasureLevel6to7());">Level 6-7</a></li>
-              <li><a @click="output(treasureLevel8to9());">Level 8-9</a></li>
-              <li><a @click="output(treasureLevel10to12());">Level 10-12</a></li>
-              <li><a @click="output(treasureLevel13());">Level 13+</a></li>
+              <li><a @click="output(treasureLevel2to3())">Level 2-3</a></li>
+              <li><a @click="output(treasureLevel4to5())">Level 4-5</a></li>
+              <li><a @click="output(treasureLevel6to7())">Level 6-7</a></li>
+              <li><a @click="output(treasureLevel8to9())">Level 8-9</a></li>
+              <li><a @click="output(treasureLevel10to12())">Level 10-12</a></li>
+              <li><a @click="output(treasureLevel13())">Level 13+</a></li>
             </ul>
           </div>
         </div>
@@ -86,17 +86,17 @@
         <h6 class="buttonLabel" data-toggle="collapse" href="#encounter-buttons">Encounter Tables</h6>
         <div id="encounter-buttons" class="collapse.in">
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(monsterLevel1());">Dungeon Level 1</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(monsterLevel1())">Dungeon Level 1</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(monsterLevel2());">Dungeon Level 2</a></li>
-              <li><a @click="output(monsterLevel3());">Dungeon Level 3</a></li>
-              <li><a @click="output(monsterLevel4());">Dungeon Level 4</a></li>
-              <li><a @click="output(monsterLevel5());">Dungeon Level 5</a></li>
-              <li><a @click="output(monsterLevel6());">Dungeon Level 6</a></li>
+              <li><a @click="output(monsterLevel2())">Dungeon Level 2</a></li>
+              <li><a @click="output(monsterLevel3())">Dungeon Level 3</a></li>
+              <li><a @click="output(monsterLevel4())">Dungeon Level 4</a></li>
+              <li><a @click="output(monsterLevel5())">Dungeon Level 5</a></li>
+              <li><a @click="output(monsterLevel6())">Dungeon Level 6</a></li>
             </ul>
           </div>
 
@@ -118,7 +118,7 @@
             </ul>
           </div>
 
-          <button class="btn btn-default btn-sm" @click="output(castleEncounter());">Castle</button>
+          <button class="btn btn-default btn-sm" @click="output(castleEncounter())">Castle</button>
         </div>
 
         <h6 class="buttonLabel" data-toggle="collapse" href="#names-buttons">Names</h6>
@@ -131,90 +131,106 @@
         <h6 class="buttonLabel" data-toggle="collapse" href="#npcs-buttons">NPCs</h6>
         <div id="npcs-buttons" class="collapse.in">
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(npcFighter(d10()));">Fighter</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(npcFighter(d10()))">Fighter</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(npcFighter(1));">Veteran (1)</a></li>
-              <li><a @click="output(npcFighter(2));">Warrior (2)</a></li>
-              <li><a @click="output(npcFighter(3));">Swordsman (3)</a></li>
-              <li><a @click="output(npcFighter(4));">Hero (4)</a></li>
-              <li><a @click="output(npcFighter(5));">Swashbuckler (5)</a></li>
-              <li><a @click="output(npcFighter(6));">Myrmidon (6)</a></li>
-              <li><a @click="output(npcFighter(7));">Champion (7)</a></li>
-              <li><a @click="output(npcFighter(8));">Superhero (8)</a></li>
-              <li><a @click="output(npcFighter(9));">Lord (9)</a></li>
-              <li><a @click="output(npcFighter(10));">Lord (10)</a></li>
-              <li><a @click="output(npcFighter(11));">Lord (11)</a></li>
-              <li><a @click="output(npcFighter(12));">Lord (12)</a></li>
+              <li><a @click="output(npcFighter(1))">Veteran (1)</a></li>
+              <li><a @click="output(npcFighter(2))">Warrior (2)</a></li>
+              <li><a @click="output(npcFighter(3))">Swordsman (3)</a></li>
+              <li><a @click="output(npcFighter(4))">Hero (4)</a></li>
+              <li><a @click="output(npcFighter(5))">Swashbuckler (5)</a></li>
+              <li><a @click="output(npcFighter(6))">Myrmidon (6)</a></li>
+              <li><a @click="output(npcFighter(7))">Champion (7)</a></li>
+              <li><a @click="output(npcFighter(8))">Superhero (8)</a></li>
+              <li><a @click="output(npcFighter(9))">Lord (9)</a></li>
+              <li><a @click="output(npcFighter(10))">Lord (10)</a></li>
+              <li><a @click="output(npcFighter(11))">Lord (11)</a></li>
+              <li><a @click="output(npcFighter(12))">Lord (12)</a></li>
             </ul>
           </div>
 
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(npcThief(d10()));">Thief</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(npcThief(d10()))">Thief</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(npcThief(1));">Apprentice (1)</a></li>
-              <li><a @click="output(npcThief(2));">Footpad (2)</a></li>
-              <li><a @click="output(npcThief(3));">Robber (3)</a></li>
-              <li><a @click="output(npcThief(4));">Burglar (4)</a></li>
-              <li><a @click="output(npcThief(5));">Cutpurse (5)</a></li>
-              <li><a @click="output(npcThief(6));">Sharper (6)</a></li>
-              <li><a @click="output(npcThief(7));">Pilferer (7)</a></li>
-              <li><a @click="output(npcThief(8));">Master Pilferer (8)</a></li>
-              <li><a @click="output(npcThief(9));">Thief (9)</a></li>
-              <li><a @click="output(npcThief(10));">Master Thief (10)</a></li>
-              <li><a @click="output(npcThief(11));">Master Thief (11)</a></li>
-              <li><a @click="output(npcThief(12));">Master Thief (12)</a></li>
+              <li><a @click="output(npcThief(1))">Apprentice (1)</a></li>
+              <li><a @click="output(npcThief(2))">Footpad (2)</a></li>
+              <li><a @click="output(npcThief(3))">Robber (3)</a></li>
+              <li><a @click="output(npcThief(4))">Burglar (4)</a></li>
+              <li><a @click="output(npcThief(5))">Cutpurse (5)</a></li>
+              <li><a @click="output(npcThief(6))">Sharper (6)</a></li>
+              <li><a @click="output(npcThief(7))">Pilferer (7)</a></li>
+              <li><a @click="output(npcThief(8))">Master Pilferer (8)</a></li>
+              <li><a @click="output(npcThief(9))">Thief (9)</a></li>
+              <li><a @click="output(npcThief(10))">Master Thief (10)</a></li>
+              <li><a @click="output(npcThief(11))">Master Thief (11)</a></li>
+              <li><a @click="output(npcThief(12))">Master Thief (12)</a></li>
             </ul>
           </div>
 
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(npcCleric(d10()));">Cleric</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(npcCleric(d10()))">Cleric</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(npcCleric(1));">Acolyte (1)</a></li>
-              <li><a @click="output(npcCleric(2));">Adept (2)</a></li>
-              <li><a @click="output(npcCleric(3));">Priest (3)</a></li>
-              <li><a @click="output(npcCleric(4));">Vicar (4)</a></li>
-              <li><a @click="output(npcCleric(5));">Curate (5)</a></li>
-              <li><a @click="output(npcCleric(6));">Bishop (6)</a></li>
-              <li><a @click="output(npcCleric(7));">Lama (7)</a></li>
-              <li><a @click="output(npcCleric(8));">Patriarch (8)</a></li>
-              <li><a @click="output(npcCleric(9));">Patriarch (9)</a></li>
-              <li><a @click="output(npcCleric(10));">Patriarch (10)</a></li>
-              <li><a @click="output(npcCleric(11));">Patriarch (11)</a></li>
-              <li><a @click="output(npcCleric(12));">Patriarch (12)</a></li>
+              <li><a @click="output(npcCleric(1))">Acolyte (1)</a></li>
+              <li><a @click="output(npcCleric(2))">Adept (2)</a></li>
+              <li><a @click="output(npcCleric(3))">Priest (3)</a></li>
+              <li><a @click="output(npcCleric(4))">Vicar (4)</a></li>
+              <li><a @click="output(npcCleric(5))">Curate (5)</a></li>
+              <li><a @click="output(npcCleric(6))">Bishop (6)</a></li>
+              <li><a @click="output(npcCleric(7))">Lama (7)</a></li>
+              <li><a @click="output(npcCleric(8))">Patriarch (8)</a></li>
+              <li><a @click="output(npcCleric(9))">Patriarch (9)</a></li>
+              <li><a @click="output(npcCleric(10))">Patriarch (10)</a></li>
+              <li><a @click="output(npcCleric(11))">Patriarch (11)</a></li>
+              <li><a @click="output(npcCleric(12))">Patriarch (12)</a></li>
             </ul>
           </div>
 
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(npcWizard(d10()));">Magic-User</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(npcWizard(d10()))">Magic-User</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a @click="output(npcWizard(1));">Medium (1)</a></li>
-              <li><a @click="output(npcWizard(2));">Seer (2)</a></li>
-              <li><a @click="output(npcWizard(3));">Conjurer (3)</a></li>
-              <li><a @click="output(npcWizard(4));">Theurgist (4)</a></li>
-              <li><a @click="output(npcWizard(5));">Thaumaturgist (5)</a></li>
-              <li><a @click="output(npcWizard(6));">Magician (6)</a></li>
-              <li><a @click="output(npcWizard(7));">Enchanter (7)</a></li>
-              <li><a @click="output(npcWizard(8));">Warlock (8)</a></li>
-              <li><a @click="output(npcWizard(9));">Sorcerer (9)</a></li>
-              <li><a @click="output(npcWizard(10));">Necromancer (10)</a></li>
-              <li><a @click="output(npcWizard(11));">Wizard (11)</a></li>
-              <li><a @click="output(npcWizard(12));">Wizard (12)</a></li>
+              <li><a @click="output(npcWizard(1))">Medium (1)</a></li>
+              <li><a @click="output(npcWizard(2))">Seer (2)</a></li>
+              <li><a @click="output(npcWizard(3))">Conjurer (3)</a></li>
+              <li><a @click="output(npcWizard(4))">Theurgist (4)</a></li>
+              <li><a @click="output(npcWizard(5))">Thaumaturgist (5)</a></li>
+              <li><a @click="output(npcWizard(6))">Magician (6)</a></li>
+              <li><a @click="output(npcWizard(7))">Enchanter (7)</a></li>
+              <li><a @click="output(npcWizard(8))">Warlock (8)</a></li>
+              <li><a @click="output(npcWizard(9))">Sorcerer (9)</a></li>
+              <li><a @click="output(npcWizard(10))">Necromancer (10)</a></li>
+              <li><a @click="output(npcWizard(11))">Wizard (11)</a></li>
+              <li><a @click="output(npcWizard(12))">Wizard (12)</a></li>
+            </ul>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-sm" @click="output(npcDwarf(d6()))">Dwarf</button>
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a @click="output(npcDwarf(1))">Dwarf Veteran (1)</a></li>
+              <li><a @click="output(npcDwarf(2))">Dwarf Warrior (2)</a></li>
+              <li><a @click="output(npcDwarf(3))">Dwarf Swordsman (3)</a></li>
+              <li><a @click="output(npcDwarf(4))">Dwarf Hero (4)</a></li>
+              <li><a @click="output(npcDwarf(5))">Dwarf Swashbuckler (5)</a></li>
+              <li><a @click="output(npcDwarf(6))">Dwarf Myrmidon (6)</a></li>
             </ul>
           </div>
         </div>
