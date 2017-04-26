@@ -255,114 +255,45 @@ function npcDwarf(levelArg: number = 1, alignmentArg: string = "") {
 }
 
 function npcHalfling(levelArg: number = 1, alignmentArg: string = "") {
-  let level = Math.floor(levelArg)
-  level = (level < 1 ? 1 : level)
+  let npc = newNpc("H", levelArg)
+  npc.alignment = pickAlignment(alignmentArg, "L")
 
-  // randomly pick basics
-  let alignment = alignmentArg
-  if (!(alignment === "L" || alignment === "N" || alignment === "C")) {
-    alignment = "L"
-  }
-  const gender = npcGender()
-  let name
-  if (gender === "M" || (gender === "*" && flip())) {
-    name = oddNames.masculineName()
+  // determine basic level derivatives
+  if (npc.level <= 3) {
+    npc = {
+      ...[
+        { title: "Halfling Veteran", hd: 1, hpBonus: 1 },
+        { title: "Halfling Warrior", hd: 2, hpBonus: 0 },
+        { title: "Halfling Swordsman", hd: 3, hpBonus: 0 },
+      ][npc.level - 1],
+      ...npc,
+    }
   }
   else {
-    name = oddNames.feminineName()
-  }
-  name += oddNames.epithet()
-
-  let title
-  let hd = 1
-  let hpBonus = 0
-  // determine basic level derivatives
-  switch (level) {
-    case 1:
-      title = "Halfling Veteran"
-      hd = 1
-      hpBonus = 1
-      break
-    case 2:
-      title = "Halfling Warrior"
-      hd = 2
-      hpBonus = 0
-      break
-    case 3:
-      title = "Halfling Swordsman"
-      hd = 3
-      hpBonus = 0
-      break
-    default:
-      title = "Halfling Hero"
-      hd = 4
-      hpBonus = 0
-      break
+    npc = { title: "Halfling Hero", hd: 4, hpBonus: 0, ...npc }
   }
 
-  // roll ability scores
-  const aStr = d6(3)
-  const aInt = d6(3)
-  const aWis = d6(3)
-  const aCon = d6(3)
-  const aDex = d6(3)
-  const aCha = d6(3)
+  npc.hp = rollHp(npc)
 
-  let hp = 0
-  // roll HP
-  for (let i = 0; i <= hd; i++) {
-    let roll = d6() + abilityMod(aCon)
-    roll = (roll < 1) ? 1 : roll
-    hp += roll
-  }
-  hp += hpBonus
-
-  let sword
-  let armor = 0
-  let shield = 0
   // generate magic items
-  if (percentChance(level * 5)) {
-    sword = magicSword()
+  if (percentChance(npc.level * 5)) {
+    npc.sword = magicSword()
   }
-  if (percentChance(level * 5)) {
-    armor = armorOnly()
+  if (percentChance(npc.level * 5)) {
+    npc.armor = armorOnly()
   }
-  if (percentChance(level * 5)) {
-    shield = shieldOnly()
+  if (percentChance(npc.level * 5)) {
+    npc.shield = shieldOnly()
   }
   // OED version: sword, armor(+shield?), potion, misc.
   // default to +1, then half chance to increase by 1, repeating
 
   // calculate AC
   // assume plate & shield for base AC 2
-  const ac = 2 - armor - shield - abilityMod(aDex)
+  npc.ac = 2 - npc.armor - npc.shield - abilityMod(npc.dex)
 
   // generate output string
-  let output = `${title} ${name}\n`
-  output += `${gender} `
-  output += `${alignment} `
-  output += `F${level} `
-  output += `S:${aStr} `
-  output += `I:${aInt} `
-  output += `W:${aWis} `
-  output += `C:${aCon} `
-  output += `D:${aDex} `
-  output += `X:${aCha} `
-  output += `HP:${hp} `
-  output += `AC:${ac} `
-  output += "\n"
-  if (armor > 0) {
-    output += `Armor +${armor}\n`
-  }
-  if (shield > 0) {
-    output += `Shield +${shield}\n`
-  }
-  if (sword) {
-    output += sword
-  }
-  output = output.trim()
-  output += "\n"
-  return output
+  return outputNpc(npc)
 }
 
 function npcThief(levelArg: number = 1, alignmentArg: string = "") {

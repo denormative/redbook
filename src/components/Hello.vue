@@ -233,6 +233,20 @@
               <li><a @click="output(npcDwarf(6))">Dwarf Myrmidon (6)</a></li>
             </ul>
           </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-sm" @click="output(npcHalfling(d4()))">Halfling</button>
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a @click="output(npcHalfling(1))">Halfling Veteran (1)</a></li>
+              <li><a @click="output(npcHalfling(2))">Halfling Warrior (2)</a></li>
+              <li><a @click="output(npcHalfling(3))">Halfling Swordsman (3)</a></li>
+              <li><a @click="output(npcHalfling(4))">Halfling Hero (4)</a></li>
+            </ul>
+          </div>
         </div>
 
         <h6 class="buttonLabel" data-toggle="collapse" href="#experimental-buttons">Experimental</h6>
