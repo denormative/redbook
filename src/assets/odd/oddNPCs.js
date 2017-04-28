@@ -138,7 +138,10 @@ function outputNpc(npc) {
     output += `${npc.ring}\n`
   }
   if (npc.sword) {
-    output += npc.sword
+    output += `${npc.sword}\n`
+  }
+  if (npc.spells.length > 0) {
+    output += `Spells:\t${npc.spells.join("\n\t")}\n`
   }
   return `${output.trim()}\n`
 }
@@ -161,6 +164,7 @@ function newNpc(klass: string = "", level: number = 1, armourType: string) {
     armourType,
     shield: 0,
     ac: undefined,
+    spells: [],
   }
   npc.name = pickName(npc.gender)
 
@@ -174,6 +178,7 @@ function npcFighter(level: number = 1, alignment: string = "") {
   // determine basic level derivatives
   if (npc.level <= 9) {
     npc = {
+      ...npc,
       ...[
         { title: "Veteran", hd: 1, hpBonus: 1 },
         { title: "Warrior", hd: 2, hpBonus: 0 },
@@ -185,11 +190,10 @@ function npcFighter(level: number = 1, alignment: string = "") {
         { title: "Superhero", hd: 8, hpBonus: 2 },
         { title: "Lord", hd: 9, hpBonus: 3 },
       ][npc.level - 1],
-      ...npc,
     }
   }
   else {
-    npc = { title: "Lord", hd: 10, hpBonus: npc.level - 9, ...npc }
+    npc = { ...npc, title: "Lord", hd: 10, hpBonus: npc.level - 9 }
   }
 
   npc.hp = rollHp(npc)
@@ -222,6 +226,7 @@ function npcDwarf(levelArg: number = 1, alignmentArg: string = "") {
   // determine basic level derivatives
   if (npc.level <= 5) {
     npc = {
+      ...npc,
       ...[
         { title: "Dwarf Veteran", hd: 1, hpBonus: 1 },
         { title: "Dwarf Warrior", hd: 2, hpBonus: 0 },
@@ -229,11 +234,10 @@ function npcDwarf(levelArg: number = 1, alignmentArg: string = "") {
         { title: "Dwarf Hero", hd: 4, hpBonus: 0 },
         { title: "Dwarf Swashbuckler", hd: 5, hpBonus: 1 },
       ][npc.level - 1],
-      ...npc,
     }
   }
   else {
-    npc = { title: "Dwarf Myrmidon", hd: 6, hpBonus: 0, ...npc }
+    npc = { ...npc, title: "Dwarf Myrmidon", hd: 6, hpBonus: 0 }
   }
 
   npc.hp = rollHp(npc)
@@ -266,16 +270,16 @@ function npcHalfling(levelArg: number = 1, alignmentArg: string = "") {
   // determine basic level derivatives
   if (npc.level <= 3) {
     npc = {
+      ...npc,
       ...[
         { title: "Halfling Veteran", hd: 1, hpBonus: 1 },
         { title: "Halfling Warrior", hd: 2, hpBonus: 0 },
         { title: "Halfling Swordsman", hd: 3, hpBonus: 0 },
       ][npc.level - 1],
-      ...npc,
     }
   }
   else {
-    npc = { title: "Halfling Hero", hd: 4, hpBonus: 0, ...npc }
+    npc = { ...npc, title: "Halfling Hero", hd: 4, hpBonus: 0 }
   }
 
   npc.hp = rollHp(npc)
@@ -308,6 +312,7 @@ function npcThief(levelArg: number = 1, alignmentArg: string = "") {
   // determine basic level derivatives
   if (npc.level <= 9) {
     npc = {
+      ...npc,
       ...[
         { title: "Apprentice", hd: 1, hpBonus: 0 },
         { title: "Footpad", hd: 2, hpBonus: 0 },
@@ -319,11 +324,10 @@ function npcThief(levelArg: number = 1, alignmentArg: string = "") {
         { title: "Master Pilferer", hd: 6, hpBonus: 0 },
         { title: "Thief", hd: 7, hpBonus: 0 },
       ][npc.level - 1],
-      ...npc,
     }
   }
   else {
-    npc = { title: "Master Thief", hd: 7, hpBonus: npc.level - 9, ...npc }
+    npc = { ...npc, title: "Master Thief", hd: 7, hpBonus: npc.level - 9 }
   }
 
   // generate magic items
@@ -350,182 +354,99 @@ function npcThief(levelArg: number = 1, alignmentArg: string = "") {
   return outputNpc(npc)
 }
 
-function npcCleric(levelArg: number = 1, alignmentArg: string = "") {
-  let level = Math.floor(levelArg)
-  level = (level < 1 ? 1 : level)
+function pickSpells(klass: string, spellList: Array<Array<number>>) {
+  const spells = [] // eslint-disable-line
+  spellList.forEach((spellpair) => {
+    // console.log(...spellpair)
+    switch (klass) {
+      case "E":
+        spells.push(...spellBookEvil(spellpair[0], spellpair[1]))
+        break
+      case "C":
+        spells.push(...spellBookClr(spellpair[0], spellpair[1]))
+        break
+      default:
+        console.error("pickSpells switch error")
+        break
+    }
+  })
+  return spells
+}
 
-  // randomly pick basics
-  let alignment = alignmentArg
-  if (!(alignment === "L" || alignment === "N" || alignment === "C")) {
-    if (level >= 7) {
-      alignment = flip() ? "L" : "C"
+function npcCleric(levelArg: number = 1, alignmentArg: string = "") {
+  let npc = newNpc("C", levelArg, "Plate")
+  npc.alignment = alignmentArg
+  if (!(npc.alignment === "L" || npc.alignment === "N" || npc.alignment === "C")) {
+    if (npc.level >= 7) {
+      npc.alignment = flip() ? "L" : "C"
     }
     else {
-      alignment = npcAlignment()
+      npc.alignment = pickAlignment()
     }
   }
-  const gender = npcGender()
-  let name
-  if (gender === "M" || (gender === "*" && flip())) {
-    name = oddNames.masculineName()
+
+  // determine basic level derivatives
+  if (npc.level <= 9) {
+    npc = {
+      ...npc,
+      ...[
+        { title: npc.alignment === "C" ? "Evil Acolyte" : "Acolyte", hd: 1, hpBonus: 0 },
+        { title: npc.alignment === "C" ? "Evil Adept" : "Adept", hd: 2, hpBonus: 0, spells: [[1, 1]] },
+        { title: npc.alignment === "C" ? "Evil Priest" : "Village Priest", hd: 3, hpBonus: 0, spells: [[1, 2]] },
+        { title: npc.alignment === "C" ? "Shaman" : "Vicar", hd: 4, hpBonus: 0, spells: [[1, 2], [2, 1]] },
+        { title: npc.alignment === "C" ? "Evil Curate" : "Curate", hd: 4, hpBonus: 1, spells: [[1, 2], [2, 2]] },
+        { title: npc.alignment === "C" ? "Evil Bishop" : "Bishop", hd: 5, hpBonus: 0, spells: [[1, 2], [2, 2], [3, 1], [4, 1]] },
+        {
+          title: npc.alignment === "C" ? "Evil Lama" : "Lama",
+          hd: 6,
+          hpBonus: 0,
+          spells: [[1, 2], [2, 2], [3, 2], [4, 1], [5, 1]],
+        },
+        {
+          title: npc.alignment === "C" ? "Evil High Priest" : "Patriarch",
+          hd: 7,
+          hpBonus: 0,
+          spells: [[1, 2], [2, 2], [3, 2], [4, 2], [5, 2]],
+        },
+        {
+          title: npc.alignment === "C" ? "Evil High Priest" : "Patriarch",
+          hd: 7,
+          hpBonus: 1,
+          spells: [[1, 3], [2, 3], [3, 3], [4, 2], [5, 2]],
+        },
+      ][npc.level - 1],
+    }
   }
   else {
-    name = oddNames.feminineName()
+    npc = {
+      ...npc,
+      title: npc.alignment === "C" ? "Evil High Priest" : "Patriarch",
+      hd: 7,
+      hpBonus: npc.level - 8,
+      spells: [[1, 3], [2, 3], [3, 3], [4, 3], [5, 3]],
+    }
   }
-  name += oddNames.epithet()
+  npc.spells = pickSpells(npc.alignment === "C" ? "E" : "C", npc.spells)
 
-  let title
-  let hd = 1
-  let hpBonus = 0
-  const spells = []
-  // determine basic level derivatives
-  switch (level) {
-    case 1:
-      title = alignment === "C" ? "Evil Acolyte" : "Acolyte"
-      hd = 1
-      hpBonus = 0
-      break
-    case 2:
-      title = alignment === "C" ? "Evil Adept" : "Adept"
-      hd = 2
-      hpBonus = 0
-      spells.push(alignment === "C" ? spellBookEvil(1, 1).join(", ") : spellBookClr(1, 1).join(", "))
-      break
-    case 3:
-      title = alignment === "C" ? "Evil Priest" : "Village Priest"
-      hd = 3
-      hpBonus = 0
-      spells.push(alignment === "C" ? spellBookEvil(1, 2).join(", ") : spellBookClr(1, 2).join(", "))
-      break
-    case 4:
-      title = alignment === "C" ? "Shaman" : "Vicar"
-      hd = 4
-      hpBonus = 0
-      spells.push(alignment === "C" ? spellBookEvil(1, 2).join(", ") : spellBookClr(1, 2).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(2, 1).join(", ") : spellBookClr(2, 1).join(", "))
-      break
-    case 5:
-      title = alignment === "C" ? "Evil Curate" : "Curate"
-      hd = 4
-      hpBonus = 1
-      spells.push(alignment === "C" ? spellBookEvil(1, 2).join(", ") : spellBookClr(1, 2).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(2, 2).join(", ") : spellBookClr(2, 2).join(", "))
-      break
-    case 6:
-      title = alignment === "C" ? "Evil Bishop" : "Bishop"
-      hd = 5
-      hpBonus = 0
-      spells.push(alignment === "C" ? spellBookEvil(1, 2).join(", ") : spellBookClr(1, 2).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(2, 2).join(", ") : spellBookClr(2, 2).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(3, 1).join(", ") : spellBookClr(3, 1).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(4, 1).join(", ") : spellBookClr(4, 1).join(", "))
-      break
-    case 7:
-      title = alignment === "C" ? "Evil Lama" : "Lama"
-      hd = 6
-      hpBonus = 0
-      spells.push(alignment === "C" ? spellBookEvil(1, 2).join(", ") : spellBookClr(1, 2).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(2, 2).join(", ") : spellBookClr(2, 2).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(3, 2).join(", ") : spellBookClr(3, 2).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(4, 1).join(", ") : spellBookClr(4, 1).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(5, 1).join(", ") : spellBookClr(5, 1).join(", "))
-      break
-    case 8:
-      title = alignment === "C" ? "Evil High Priest" : "Patriarch"
-      hd = 7
-      hpBonus = 0
-      spells.push(alignment === "C" ? spellBookEvil(1, 2).join(", ") : spellBookClr(1, 2).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(2, 2).join(", ") : spellBookClr(2, 2).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(3, 2).join(", ") : spellBookClr(3, 2).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(4, 2).join(", ") : spellBookClr(4, 2).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(5, 2).join(", ") : spellBookClr(5, 2).join(", "))
-      break
-    case 9:
-      title = alignment === "C" ? "Evil High Priest" : "Patriarch"
-      hd = 7
-      hpBonus = 1
-      spells.push(alignment === "C" ? spellBookEvil(1, 3).join(", ") : spellBookClr(1, 3).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(2, 3).join(", ") : spellBookClr(2, 3).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(3, 3).join(", ") : spellBookClr(3, 3).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(4, 2).join(", ") : spellBookClr(4, 2).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(5, 2).join(", ") : spellBookClr(5, 2).join(", "))
-      break
-    default:
-      title = alignment === "C" ? "Evil High Priest" : "Patriarch"
-      hd = 7
-      hpBonus = level - 8
-      spells.push(alignment === "C" ? spellBookEvil(1, 3).join(", ") : spellBookClr(1, 3).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(2, 3).join(", ") : spellBookClr(2, 3).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(3, 3).join(", ") : spellBookClr(3, 3).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(4, 3).join(", ") : spellBookClr(4, 3).join(", "))
-      spells.push(alignment === "C" ? spellBookEvil(5, 3).join(", ") : spellBookClr(5, 3).join(", "))
-      break
-  }
-
-  // roll ability scores
-  const aStr = d6(3)
-  const aInt = d6(3)
-  const aWis = d6(3)
-  const aCon = d6(3)
-  const aDex = d6(3)
-  const aCha = d6(3)
-
-  // roll HP
-  let hp = 0
-  for (let i = 0; i <= hd; i++) {
-    let roll = d6() + abilityMod(aCon)
-    roll = (roll < 1) ? 1 : roll
-    hp += roll
-  }
-  hp += hpBonus
-
-  let sword
-  let armor = 0
-  let shield = 0
   // generate magic items
-  if (percentChance(level * 5)) {
-    sword = clericItem()
+  if (percentChance(npc.level * 5)) {
+    npc.sword = clericItem()
   }
-  if (percentChance(level * 5)) {
-    armor = armorOnly()
+  if (percentChance(npc.level * 5)) {
+    npc.armor = armorOnly()
   }
-  if (percentChance(level * 5)) {
-    shield = shieldOnly()
+  if (percentChance(npc.level * 5)) {
+    npc.shield = shieldOnly()
   }
   // OED version: sword, armor(+shield?), potion, misc.
   // default to +1, then half chance to increase by 1, repeating
 
   // calculate AC
   // assume plate & shield for base AC 2
-  const ac = 2 - armor - shield - abilityMod(aDex)
+  npc.ac = 2 - npc.armor - npc.shield - abilityMod(npc.dex)
 
   // generate output string
-  let output = `${title} ${name}\n`
-  output += `${gender} `
-  output += `${alignment} `
-  output += `C${level} `
-  output += `S:${aStr} `
-  output += `I:${aInt} `
-  output += `W:${aWis} `
-  output += `C:${aCon} `
-  output += `D:${aDex} `
-  output += `X:${aCha} `
-  output += `HP:${hp} `
-  output += `AC:${ac} `
-  output += "\n"
-  if (armor > 0) {
-    output += `Armor +${armor}\n`
-  }
-  if (shield > 0) {
-    output += `Shield +${shield}\n`
-  }
-  if (sword) {
-    output += `${sword}\n`
-  }
-  output += `Spellbook: ${spells.join("\n")}\n`
-  output = output.trim()
-  output += "\n"
-  return output
+  return outputNpc(npc)
 }
 
 function npcWizard(levelArg: number = 1, alignmentArg: string = "") {
