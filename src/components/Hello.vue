@@ -2,15 +2,7 @@
   <div class="container-fluid">
     <div class="d-flex flex-row">
       <div class="flex-col">
-        <div class="btn-group mb-1" v-for="y in diceToRoll">
-          <button type="button" class="btn btn-default btn-sm" @click="output(d(1, y))">d{{y}}</button>
-          <button type="button" class="btn btn-default btn-sm dropdown-toggle dropdown-toggle-split mr-1" data-toggle="dropdown" aria-expanded="false">
-            <span class="sr-only">Toggle Dropdown</span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li v-for="x in dropdownList"><a @click="output(d(x, y))">{{x}}d{{y}}</a></li>
-          </ul>
-        </div>
+        <basic-dice v-on:output="value => output(value)"></basic-dice>
 
         <h6 class="buttonLabel" data-toggle="collapse" href="#dice-buttons">Special Dice</h6>
         <div id="dice-buttons" class="collapse show">
@@ -23,7 +15,6 @@
           <button class="btn btn-default btn-sm" @click="output(reaction())">reaction</button>
           <button class="btn btn-default btn-sm" @click="output(loyalty())">loyalty</button>
         </div>
-
 
         <h6 class="buttonLabel" data-toggle="collapse" href="#treasure-buttons">Treasure Tables</h6>
         <div id="treasure-buttons" class="collapse.in">
@@ -313,6 +304,7 @@
 
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
+import BasicDice from './BasicDice'
 
 import { rollAbilities } from '../vuex/abilities.js'
 import { roll } from '../assets/dice.js'
@@ -329,12 +321,12 @@ import oddEncounters from '../assets/odd/oddEncounters.js'
 export default {
   name: 'hello',
   props: [],
-  components: {},
+  components: {
+    BasicDice,
+  },
   data() {
     return {
       outputLog: "",
-      dropdownList: [2, 3, 4, 5, 6, 7, 8, 9, 10],
-      diceToRoll: [2, 3, 4, 6, 8, 10, 12, 20, 100],
       specialRolls: [
         { n: 10, x: 1, y: 6, p: 0 },
         { n: 10, x: 1, y: 20, p: 0 },
@@ -377,16 +369,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
 textarea {
   font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
 }
