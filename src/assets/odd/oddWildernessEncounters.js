@@ -1,7 +1,4 @@
 /* @flow */
-/* eslint default-case: "off" */
-/* eslint consistent-return: "off" */
-// FIXME: remove the above eventually
 /*
  * This is free and unencumbered software released into the public domain.
  *
@@ -46,6 +43,7 @@ function monsterHumanTypical() {
     case 10: return "Bandits"
     case 11: return "Evil High Priest"
     case 12: return "Patriarch"
+    default: return ""
   }
 }
 
@@ -63,6 +61,7 @@ function monsterHumanMountain() {
     case 10: return "Cavemen"
     case 11: return "Patriarch"
     case 12: return "Berserkers"
+    default: return ""
   }
 }
 
@@ -74,6 +73,7 @@ function monsterHumanDesert() {
     case 4: return "Lord"
     case 5: return "Wizard"
     case 6: return "Nomads"
+    default: return ""
   }
 }
 
@@ -85,6 +85,7 @@ function monsterHumanBarsoom() {
     case 4: return "Yellow Martians"
     case 5: return "Tharks"
     case 6: return "White Martians"
+    default: return ""
   }
 }
 
@@ -96,6 +97,7 @@ function monsterHumanWater() {
     case 4: return "Pirates"
     case 5: return "Buccaneers"
     case 6: return "Mermen"
+    default: return ""
   }
 }
 
@@ -113,6 +115,7 @@ function monsterFlyer() {
     case 10: return "Pegasi"
     case 11: return "Hippogriffs"
     case 12: return "Balrogs"
+    default: return ""
   }
 }
 
@@ -130,6 +133,7 @@ function monsterSwimmer() {
     case 10: return "Nixies"
     case 11: return "Giant Fish"
     case 12: return "Dragon Turtle"
+    default: return ""
   }
 }
 
@@ -143,6 +147,7 @@ function monsterUndead() {
     case 6: return "Mummies"
     case 7: return "Spectres"
     case 8: return "Vampires"
+    default: return ""
   }
 }
 
@@ -160,6 +165,7 @@ function monsterHumanoid() {
     case 10: return "Dwarves"
     case 11: return "Elves"
     case 12: return "Ents"
+    default: return ""
   }
 }
 
@@ -169,6 +175,7 @@ function monsterLycanthrope() {
     case 2: return "Wereboars"
     case 3: return "Weretigers"
     case 4: return "Werebears"
+    default: return ""
   }
 }
 
@@ -186,6 +193,7 @@ function monsterDragon() {
     case 10: return "Balrogs"
     case 11: return "Chimerae"
     case 12: return "Hydra (7-12 heads)"
+    default: return ""
   }
 }
 
@@ -203,6 +211,7 @@ function monsterAnimal() {
     case 10: return "Lions"
     case 11: return "Boars"
     case 12: return "Snakes"
+    default: return ""
   }
 }
 
@@ -216,6 +225,7 @@ function monsterMiscFey() {
     case 6: return "Manticores"
     case 7: return "Dryads"
     case 8: return "Medusae"
+    default: return ""
   }
 }
 
@@ -229,6 +239,7 @@ function monsterMiscDino() {
     case 6: return "Tyrannosaurus Rex"
     case 7: return "Pterodactyl"
     case 8: return "Brontosaurus"
+    default: return ""
   }
 }
 
@@ -246,6 +257,7 @@ function monsterBarsoom() {
     case 10: return "Darseen"
     case 11: return "Banths"
     case 12: return "Tharks"
+    default: return ""
   }
 }
 
@@ -263,6 +275,7 @@ function monsterIceAge() {
     case 10: return "Sabre Tooth Tigers"
     case 11: return "Dire Wolves"
     case 12: return "Spotted Lions"
+    default: return ""
   }
 }
 
@@ -276,6 +289,7 @@ function encounterClear() {
     case 6: return monsterHumanTypical()
     case 7: return monsterAnimal()
     case 8: return monsterDragon()
+    default: return ""
   }
 }
 
@@ -289,6 +303,7 @@ function encounterWoods() {
     case 6: return monsterHumanTypical()
     case 7: return monsterAnimal()
     case 8: return monsterDragon()
+    default: return ""
   }
 }
 
@@ -302,6 +317,7 @@ function encounterRiver() {
     case 6: return monsterSwimmer()
     case 7: return monsterAnimal()
     case 8: return monsterDragon()
+    default: return ""
   }
 }
 
@@ -315,6 +331,7 @@ function encounterSwamp() {
     case 6: return monsterUndead()
     case 7: return monsterUndead()
     case 8: return monsterDragon()
+    default: return ""
   }
 }
 
@@ -328,6 +345,7 @@ function encounterMountains() {
     case 6: return monsterHumanoid()
     case 7: return monsterDragon()
     case 8: return monsterDragon()
+    default: return ""
   }
 }
 
@@ -339,6 +357,7 @@ function encounterDesert() {
     case 4: return monsterLycanthrope()
     case 5: return monsterAnimal()
     case 6: return monsterDragon()
+    default: return ""
   }
 }
 
@@ -348,6 +367,7 @@ function encounterCity() {
     case 2: return monsterUndead()
     case 3: return monsterUndead()
     case 4: return monsterHumanTypical()
+    default: return ""
   }
 }
 
@@ -355,6 +375,7 @@ function encounterMars() {
   switch (d2()) {
     case 1: return monsterHumanBarsoom()
     case 2: return monsterBarsoom()
+    default: return ""
   }
 }
 
@@ -363,6 +384,7 @@ function encounterLostWorld() {
     case 1: return "Cave Men"
     case 2: return monsterIceAge()
     case 3: return monsterMiscDino()
+    default: return ""
   }
 }
 

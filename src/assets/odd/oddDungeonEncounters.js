@@ -1,6 +1,4 @@
 /* @flow */
-/* eslint default-case: "off" */
-// FIXME: remove the above eventually
 /*
  * This is free and unencumbered software released into the public domain.
  *
@@ -44,8 +42,8 @@ function monsterLevel1() {
     case 6: return oddMonsters.centipede.toS()
     case 7: return oddMonsters.bandit.toS()
     case 8: return oddMonsters.giantSpider.toS()
+    default: return ""
   }
-  return ""
 }
 
 function monsterLevel2() {
@@ -62,8 +60,8 @@ function monsterLevel2() {
     case 8: return oddMonsters.ghoul.toS()
     case 9: return oddMonsters.berserker.toS()
     case 10: return "theurgists"
+    default: return ""
   }
-  return ""
 }
 
 function monsterLevel3() {
@@ -81,8 +79,8 @@ function monsterLevel3() {
     case 8: return "magicians"
     case 9: return oddMonsters.giantSnake.toS()
     case 10: return oddMonsters.giantWeasel.toS()
+    default: return ""
   }
-  return ""
 }
 
 function monsterLevel4() {
@@ -100,8 +98,8 @@ function monsterLevel4() {
     case 8: return oddMonsters.gargoyle.toS()
     case 9: return oddMonsters.whiteApe.toS()
     case 10: return "enchanters"
+    default: return ""
   }
-  return ""
 }
 
 function monsterLevel5() {
@@ -121,8 +119,8 @@ function monsterLevel5() {
     case 10: return oddMonsters.wyvern.toS()
     case 11: return `${d3() + 5}-headed ${oddMonsters.hydra.toS()}`
     case 12: return oddMonsters.medusa.toS()
+    default: return ""
   }
-  return ""
 }
 
 function monsterLevel6() {
@@ -142,8 +140,8 @@ function monsterLevel6() {
     case 10: return "Wizards"
     case 11: return "Evil High Priests"
     case 12: return oddMonsters.purpleWorm.toS()
+    default: return ""
   }
-  return ""
 }
 
 function dungeonLevel1() {
@@ -154,8 +152,8 @@ function dungeonLevel1() {
     case 4: return `${Math.round(d6() / 2)} ${monsterLevel2()}`
     case 5: return `${Math.round(d6() / 4)} ${monsterLevel3()}`
     case 6: return `1 ${monsterLevel4()}`
+    default: return ""
   }
-  return ""
 }
 
 function dungeonLevel2() {
@@ -166,8 +164,8 @@ function dungeonLevel2() {
     case 4: return `${Math.round(d6() / 2)} ${monsterLevel3()}`
     case 5: return `${Math.round(d6() / 4)} ${monsterLevel4()}`
     case 6: return `1 ${monsterLevel5()}`
+    default: return ""
   }
-  return ""
 }
 
 function dungeonLevel3() {
@@ -178,8 +176,8 @@ function dungeonLevel3() {
     case 4: return `${Math.round(d6() / 2)} ${monsterLevel4()}`
     case 5: return `${Math.round(d6() / 4)} ${monsterLevel5()}`
     case 6: return `1 ${monsterLevel6()}`
+    default: return ""
   }
-  return ""
 }
 
 function dungeonLevel4to5() {
@@ -190,8 +188,8 @@ function dungeonLevel4to5() {
     case 4:
     case 5: return `${Math.round(d6() / 2)} ${monsterLevel5()}`
     case 6: return `${Math.round(d6() / 4)} ${monsterLevel6()}`
+    default: return ""
   }
-  return ""
 }
 
 function dungeonLevel6to7() {
@@ -202,8 +200,8 @@ function dungeonLevel6to7() {
     case 4: return `${d6()} ${monsterLevel5()}`
     case 5:
     case 6: return `${Math.round(d6() / 2)} ${monsterLevel6()}`
+    default: return ""
   }
-  return ""
 }
 
 function dungeonLevel8to9() {
@@ -214,8 +212,8 @@ function dungeonLevel8to9() {
     case 4:
     case 5:
     case 6: return `${d6()} ${monsterLevel6()}`
+    default: return ""
   }
-  return ""
 }
 
 function dungeonLevel10to12() {
@@ -226,8 +224,8 @@ function dungeonLevel10to12() {
     case 4:
     case 5:
     case 6: return `${d6()} ${monsterLevel6()}`
+    default: return ""
   }
-  return ""
 }
 
 function dungeonLevel13() {
