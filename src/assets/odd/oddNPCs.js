@@ -137,6 +137,9 @@ function outputNpc(npc) {
   if (npc.ring) {
     output += `${npc.ring}\n`
   }
+  if (npc.miscItem) {
+    output += `${npc.miscItem}\n`
+  }
   if (npc.sword) {
     output += `${npc.sword}\n`
   }
@@ -160,6 +163,7 @@ function newNpc(klass: string = "", level: number = 1, armourType: string) {
     hp: 0,
     sword: "",
     ring: "",
+    miscItem: "",
     armor: 0,
     armourType,
     shield: 0,
@@ -365,6 +369,9 @@ function pickSpells(klass: string, spellList: Array<Array<number>>) {
       case "C":
         spells.push(...spellBookClr(spellpair[0], spellpair[1]))
         break
+      case "M":
+        spells.push(...spellBookMu(spellpair[0], spellpair[1]))
+        break
       default:
         console.error("pickSpells switch error")
         break
@@ -450,245 +457,66 @@ function npcCleric(levelArg: number = 1, alignmentArg: string = "") {
 }
 
 function npcWizard(levelArg: number = 1, alignmentArg: string = "") {
-  let level = Math.floor(levelArg)
-  level = (level < 1 ? 1 : level)
+  let npc = newNpc("M", levelArg, "None")
+  npc.alignment = pickAlignment(alignmentArg)
 
-  // randomly pick basics
-  let alignment = alignmentArg
-  if (!(alignment === "L" || alignment === "N" || alignment === "C")) {
-    alignment = npcAlignment()
-  }
-  const gender = npcGender()
-  let name
-  if (gender === "M" || (gender === "*" && flip())) {
-    name = oddNames.masculineName()
+  if (npc.level <= 15) {
+    npc = {
+      ...npc,
+      ...[
+        { title: "Medium", hd: 1, hpBonus: 0, spells: [[1, 1]] },
+        { title: "Seer", hd: 1, hpBonus: 1, spells: [[1, 2]] },
+        { title: "Conjurer", hd: 2, hpBonus: 0, spells: [[1, 3], [2, 1]] },
+        { title: "Theurgist", hd: 2, hpBonus: 1, spells: [[1, 4], [2, 2]] },
+        { title: "Thaumaturgist", hd: 3, hpBonus: 0, spells: [[1, 4], [2, 2], [3, 1]] },
+        { title: "Magician", hd: 3, hpBonus: 1, spells: [[1, 4], [2, 2], [3, 2]] },
+        { title: "Enchanter", hd: 4, hpBonus: 0, spells: [[1, 4], [2, 3], [3, 2], [4, 1]] },
+        { title: "Warlock", hd: 5, hpBonus: 0, spells: [[1, 4], [2, 3], [3, 3], [4, 2]] },
+        { title: "Sorcerer", hd: 6, hpBonus: 1, spells: [[1, 4], [2, 3], [3, 3], [4, 2], [5, 1]] },
+        { title: "Necromancer", hd: 7, hpBonus: 0, spells: [[1, 4], [2, 4], [3, 3], [4, 3], [5, 2]] },
+        { title: "Wizard", hd: 8, hpBonus: 1, spells: [[1, 4], [2, 4], [3, 4], [4, 3], [5, 4]] },
+        { title: "Wizard", hd: 8, hpBonus: 2, spells: [[1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 1]] },
+        { title: "Wizard", hd: 8, hpBonus: 3, spells: [[1, 5], [2, 5], [3, 5], [4, 4], [5, 4], [6, 2]] },
+        { title: "Wizard", hd: 8, hpBonus: 3, spells: [[1, 5], [2, 5], [3, 5], [4, 4], [5, 4], [6, 3]] },
+        { title: "Wizard", hd: 9, hpBonus: 1, spells: [[1, 5], [2, 5], [3, 5], [4, 4], [5, 4], [6, 4]] },
+      ][npc.level - 1],
+    }
   }
   else {
-    name = oddNames.feminineName()
+    npc = {
+      ...npc,
+      title: "Wizard",
+      hd: 9,
+      hpBonus: npc.level - 14,
+      spells: [[1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5]],
+    }
   }
-  name += oddNames.epithet()
+  npc.spells = pickSpells(npc.class, npc.spells)
 
-  // determine basic level derivatives
-  // determine basic level derivatives
-  let title
-  let hd = 1
-  let hpBonus = 0
-  const spells = []
-  switch (level) {
-    case 1:
-      title = "Medium"
-      hd = 1
-      hpBonus = 0
-      spells.push(spellBookMu(1, 1).join(", "))
-      break
-    case 2:
-      title = "Seer"
-      hd = 1
-      hpBonus = 1
-      spells.push(spellBookMu(1, 2).join(", "))
-      break
-    case 3:
-      title = "Conjurer"
-      hd = 2
-      hpBonus = 0
-      spells.push(spellBookMu(1, 3).join(", "))
-      spells.push(spellBookMu(2, 1).join(", "))
-      break
-    case 4:
-      title = "Theurgist"
-      hd = 2
-      hpBonus = 1
-      spells.push(spellBookMu(1, 4).join(", "))
-      spells.push(spellBookMu(2, 2).join(", "))
-      break
-    case 5:
-      title = "Thaumaturgist"
-      hd = 3
-      hpBonus = 0
-      spells.push(spellBookMu(1, 4).join(", "))
-      spells.push(spellBookMu(2, 2).join(", "))
-      spells.push(spellBookMu(3, 1).join(", "))
-      break
-    case 6:
-      title = "Magician"
-      hd = 3
-      hpBonus = 1
-      spells.push(spellBookMu(1, 4).join(", "))
-      spells.push(spellBookMu(2, 2).join(", "))
-      spells.push(spellBookMu(3, 2).join(", "))
-      break
-    case 7:
-      title = "Enchanter"
-      hd = 4
-      hpBonus = 0
-      spells.push(spellBookMu(1, 4).join(", "))
-      spells.push(spellBookMu(2, 3).join(", "))
-      spells.push(spellBookMu(3, 2).join(", "))
-      spells.push(spellBookMu(4, 1).join(", "))
-      break
-    case 8:
-      title = "Warlock"
-      hd = 5
-      hpBonus = 0
-      spells.push(spellBookMu(1, 4).join(", "))
-      spells.push(spellBookMu(2, 3).join(", "))
-      spells.push(spellBookMu(3, 3).join(", "))
-      spells.push(spellBookMu(4, 2).join(", "))
-      break
-    case 9:
-      title = "Sorcerer"
-      hd = 6
-      hpBonus = 1
-      spells.push(spellBookMu(1, 4).join(", "))
-      spells.push(spellBookMu(2, 3).join(", "))
-      spells.push(spellBookMu(3, 3).join(", "))
-      spells.push(spellBookMu(4, 2).join(", "))
-      spells.push(spellBookMu(5, 1).join(", "))
-      break
-    case 10:
-      title = "Necromancer"
-      hd = 7
-      hpBonus = 0
-      spells.push(spellBookMu(1, 4).join(", "))
-      spells.push(spellBookMu(2, 4).join(", "))
-      spells.push(spellBookMu(3, 3).join(", "))
-      spells.push(spellBookMu(4, 3).join(", "))
-      spells.push(spellBookMu(5, 2).join(", "))
-      break
-    case 11:
-      title = "Wizard"
-      hd = 8
-      hpBonus = 1
-      spells.push(spellBookMu(1, 4).join(", "))
-      spells.push(spellBookMu(2, 4).join(", "))
-      spells.push(spellBookMu(3, 4).join(", "))
-      spells.push(spellBookMu(4, 3).join(", "))
-      spells.push(spellBookMu(5, 3).join(", "))
-      break
-    case 12:
-      title = "Wizard"
-      hd = 8
-      hpBonus = 2
-      spells.push(spellBookMu(1, 4).join(", "))
-      spells.push(spellBookMu(2, 4).join(", "))
-      spells.push(spellBookMu(3, 4).join(", "))
-      spells.push(spellBookMu(4, 4).join(", "))
-      spells.push(spellBookMu(5, 4).join(", "))
-      spells.push(spellBookMu(6, 1).join(", "))
-      break
-    case 13:
-      title = "Wizard"
-      hd = 8
-      hpBonus = 3
-      spells.push(spellBookMu(1, 5).join(", "))
-      spells.push(spellBookMu(2, 5).join(", "))
-      spells.push(spellBookMu(3, 5).join(", "))
-      spells.push(spellBookMu(4, 4).join(", "))
-      spells.push(spellBookMu(5, 4).join(", "))
-      spells.push(spellBookMu(6, 2).join(", "))
-      break
-    case 14:
-      title = "Wizard"
-      hd = 8
-      hpBonus = 3
-      spells.push(spellBookMu(1, 5).join(", "))
-      spells.push(spellBookMu(2, 5).join(", "))
-      spells.push(spellBookMu(3, 5).join(", "))
-      spells.push(spellBookMu(4, 4).join(", "))
-      spells.push(spellBookMu(5, 4).join(", "))
-      spells.push(spellBookMu(6, 3).join(", "))
-      break
-    case 15:
-      title = "Wizard"
-      hd = 9
-      hpBonus = 1
-      spells.push(spellBookMu(1, 5).join(", "))
-      spells.push(spellBookMu(2, 5).join(", "))
-      spells.push(spellBookMu(3, 5).join(", "))
-      spells.push(spellBookMu(4, 4).join(", "))
-      spells.push(spellBookMu(5, 4).join(", "))
-      spells.push(spellBookMu(6, 4).join(", "))
-      break
-    default:
-      title = "Wizard"
-      hd = 9
-      hpBonus = level - 14
-      spells.push(spellBookMu(1, 5).join(", "))
-      spells.push(spellBookMu(2, 5).join(", "))
-      spells.push(spellBookMu(3, 5).join(", "))
-      spells.push(spellBookMu(4, 5).join(", "))
-      spells.push(spellBookMu(5, 5).join(", "))
-      spells.push(spellBookMu(6, 5).join(", "))
-      break
-  }
-
-  // roll ability scores
-  const aStr = d6(3)
-  const aInt = d6(3)
-  const aWis = d6(3)
-  const aCon = d6(3)
-  const aDex = d6(3)
-  const aCha = d6(3)
-
-  // roll HP
-  let hp = 0
-  for (let i = 0; i <= hd; i++) {
-    let roll = d6() + abilityMod(aCon)
-    roll = (roll < 1) ? 1 : roll
-    hp += roll
-  }
-  hp += hpBonus
+  npc.hp = rollHp(npc)
 
   // generate magic items
-  let sword
-  let ringItem
-  let miscItem = ""
-  if (percentChance(level * 5)) {
-    sword = wand()
+  if (percentChance(npc.level * 5)) {
+    npc.sword = wand()
   }
-  if (percentChance(level * 5)) {
-    ringItem = ring(true)
+  if (percentChance(npc.level * 5)) {
+    npc.ring = ring(true)
   }
-  if (percentChance(level * 5)) {
-    miscItem = miscMagic()
+  if (percentChance(npc.level * 5)) {
+    npc.miscItem = miscMagic()
   }
   // OED version: sword, armor(+shield?), potion, misc.
   // default to +1, then half chance to increase by 1, repeating
 
   // calculate AC
   // assume no armor for base AC 9
-  let ac = 9
-  if (ringItem === "Ring of Protection") {
-    ac = 2
+  npc.ac = 9
+  if (npc.ring === "Ring of Protection") {
+    npc.ac = 2
   }
 
   // generate output string
-  let output = `${title} ${name}\n`
-  output += `${gender} `
-  output += `${alignment} `
-  output += `M${level} `
-  output += `S:${aStr} `
-  output += `I:${aInt} `
-  output += `W:${aWis} `
-  output += `C:${aCon} `
-  output += `D:${aDex} `
-  output += `X:${aCha} `
-  output += `HP:${hp} `
-  output += `AC:${ac} `
-  output += "\n"
-  if (ringItem) {
-    output += `${ringItem}\n`
-  }
-  if (miscItem !== "") {
-    output += `${miscItem}\n`
-  }
-  if (sword) {
-    output += `${sword}\n`
-  }
-  output += `Spellbook: ${spells.join("\n")}\n`
-  output = output.trim()
-  output += "\n"
-  return output
+  return outputNpc(npc)
 }
 
 function npcElf(levelArg: number = 1, alignmentArg: string = "") {
