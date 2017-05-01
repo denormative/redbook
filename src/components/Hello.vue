@@ -197,7 +197,7 @@
           </div>
 
           <div class="btn-group">
-            <button type="button" class="btn btn-default btn-sm" @click="output(npcWizard(d10()))">Magic-User</button>
+            <button type="button" class="btn btn-default btn-sm" @click="output(npcWizard(d16()))">Magic-User</button>
             <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
               <span class="caret"></span>
               <span class="sr-only">Toggle Dropdown</span>
@@ -215,6 +215,10 @@
               <li><a @click="output(npcWizard(10))">Necromancer (10)</a></li>
               <li><a @click="output(npcWizard(11))">Wizard (11)</a></li>
               <li><a @click="output(npcWizard(12))">Wizard (12)</a></li>
+              <li><a @click="output(npcWizard(13))">Wizard (13)</a></li>
+              <li><a @click="output(npcWizard(14))">Wizard (14)</a></li>
+              <li><a @click="output(npcWizard(15))">Wizard (15)</a></li>
+              <li><a @click="output(npcWizard(16))">Wizard (16)</a></li>
             </ul>
           </div>
 
@@ -245,6 +249,24 @@
               <li><a @click="output(npcHalfling(2))">Halfling Warrior (2)</a></li>
               <li><a @click="output(npcHalfling(3))">Halfling Swordsman (3)</a></li>
               <li><a @click="output(npcHalfling(4))">Halfling Hero (4)</a></li>
+            </ul>
+          </div>
+
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-sm" @click="output(npcElf(d8()))">Elf</button>
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a @click="output(npcElf(1))">Elf Veteran-Medium (1)</a></li>
+              <li><a @click="output(npcElf(2))">Elf Warrior-Seer (2)</a></li>
+              <li><a @click="output(npcElf(3))">Elf Swordsman-Conjurer (3)</a></li>
+              <li><a @click="output(npcElf(4))">Elf Hero-Theurgist (4)</a></li>
+              <li><a @click="output(npcElf(5))">Elf Hero-Thaumaturgist (5)</a></li>
+              <li><a @click="output(npcElf(6))">Elf Hero-Magician (6)</a></li>
+              <li><a @click="output(npcElf(7))">Elf Hero-Enchanter (7)</a></li>
+              <li><a @click="output(npcElf(8))">Elf Hero-Warlock (8)</a></li>
             </ul>
           </div>
         </div>
