@@ -26,7 +26,7 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
-import { d3, d4, d6, d8, d10, d12, d20, d100, flip, percentChance } from '../dice.js'
+import { d3, d6, d100, flip, percentChance } from '../dice.js'
 import oddNames from '../names/oddNames.js'
 import { spellBookMu, spellBookClr, spellBookEvil } from './oddSpells.js'
 import { armorOnly, shieldOnly, wand, miscMagic, clericItem, ring } from './oddMagicItems.js'
@@ -574,153 +574,6 @@ function npcElf(levelArg: number = 1, alignmentArg: string = "") {
 // OED Wizard items: potion, scroll, wand, misc.
 // OED Thief items: same as fighter
 
-
-// castle encounters
-function castleEncounter() {
-  let result = ""
-  const roll1 = d6()
-  const roll2 = d4()
-  if (roll1 === 1) {
-    // Lord
-    result += `${oddNames.castleName()}, castle of the `
-    result += npcFighter(9).trim()
-    if (roll2 === 1) {
-      result += `\n  ${d8()} Champions`
-    }
-    else if (roll2 === 2) {
-      result += `\n  ${d6()} Griffons ridden by Heroes`
-    }
-    else if (roll2 === 3) {
-      result += `\n  ${d10()} Myrmidons`
-    }
-    else {
-      result += `\n  ${d4()} Giants`
-    }
-    if (percentChance(25)) {
-      result += `\n  Level ${d4() + 4} Magic User`
-    }
-    if (percentChance(50)) {
-      result += `\n  Level ${d4() + 2} Cleric`
-    }
-    result += `\n  ${d6(3) * 10} Men-at-Arms`
-  }
-  else if (roll1 === 2) {
-    // Superhero
-    result += `${oddNames.castleName()}, castle of the `
-    result += npcFighter(8).trim()
-    if (roll2 === 1) {
-      result += `\n  ${d8()} Myrmidons`
-    }
-    else if (roll2 === 2) {
-      result += `\n  ${d4()} Rocs ridden by Heroes`
-    }
-    else if (roll2 === 3) {
-      result += `\n  ${d4()} Ogres`
-    }
-    else {
-      result += `\n  ${d10()} S'bucks`
-    }
-    if (percentChance(25)) {
-      result += `\n  Level ${d4() + 4} Magic User`
-    }
-    if (percentChance(50)) {
-      result += `\n  Level ${d4() + 2} Cleric`
-    }
-    result += `\n  ${d6(3) * 10} Men-at-Arms`
-  }
-  else if (roll1 === 3) {
-    // Wizard
-    result += `${oddNames.castleName()}, castle of the `
-    result += npcWizard(11).trim()
-    if (roll2 === 1) {
-      result += `\n  ${d4()} Dragons`
-    }
-    else if (roll2 === 2) {
-      result += `\n  ${d4()} Balrogs`
-    }
-    else if (roll2 === 3) {
-      result += `\n  ${d4()} Wyverns`
-    }
-    else {
-      result += `\n  ${d4()} Basilisks`
-    }
-    if (percentChance(25)) {
-      result += `\n  Level ${d4() + 4} Fighting-Man`
-    }
-    if (percentChance(50)) {
-      result += `\n  Level ${d4() + 3} Apprentice Magic-User`
-    }
-    result += `\n  ${d6(3) * 10} Men-at-Arms`
-  }
-  else if (roll1 === 4) {
-    // Necromancer
-    result += `${oddNames.castleName()}, castle of the `
-    result += npcWizard(10).trim()
-    if (roll2 === 1) {
-      result += `\n  ${d4()} Chimerae`
-    }
-    else if (roll2 === 2) {
-      result += `\n  ${d6()} Manticores`
-    }
-    else if (roll2 === 3) {
-      result += `\n  ${d12()} Lycanthropes`
-    }
-    else {
-      result += `\n  ${d12()} Gargoyles`
-    }
-    if (percentChance(25)) {
-      result += `\n  Level ${d4() + 4} Fighting-Man`
-    }
-    if (percentChance(50)) {
-      result += `\n  Level ${d4() + 3} Apprentice Magic-User`
-    }
-    result += `\n  ${d6(3) * 10} Men-at-Arms`
-  }
-  else if (roll1 === 5) {
-    // Patriarch
-    result += `${oddNames.castleName()}, castle of the `
-    result += npcCleric(8, "L").trim()
-    if (roll2 === 1) {
-      result += `\n  ${d20()} Heroes`
-    }
-    else if (roll2 === 2) {
-      result += `\n  ${d6()} Superheros`
-    }
-    else if (roll2 === 3) {
-      result += `\n  ${d10()} Ents`
-    }
-    else {
-      result += `\n  ${d8()} Hippogriffs ridden by Heros`
-    }
-    if (percentChance(50)) {
-      result += `\n  ${d6()} Level ${d4() + 3} Assistant Clerics`
-    }
-    result += `\n  ${d6(3) * 10} Men-at-Arms`
-  }
-  else {
-    // Evil High Priest
-    result += `${oddNames.castleName()}, castle of the `
-    result += npcCleric(8, "C").trim()
-    if (roll2 === 1) {
-      result += `\n  ${d10()} Trolls`
-    }
-    else if (roll2 === 2) {
-      result += `\n  ${d6()} Vampires`
-    }
-    else if (roll2 === 3) {
-      result += `\n  ${d20()} White Apes`
-    }
-    else {
-      result += `\n  ${d10()} Spectres`
-    }
-    if (percentChance(50)) {
-      result += `\n  ${d6()} Level ${d4() + 3} Assistant Clerics`
-    }
-    result += `\n  ${d6(3) * 10} Men-at-Arms`
-  }
-  return `${result.trim()}\n`
-}
-
 const oddNPCs = {
   npcFighter,
   npcDwarf,
@@ -729,7 +582,6 @@ const oddNPCs = {
   npcCleric,
   npcWizard,
   npcElf,
-  castleEncounter,
 }
 
 export {
@@ -741,5 +593,4 @@ export {
   npcCleric,
   npcWizard,
   npcElf,
-  castleEncounter,
 }
