@@ -1,14 +1,14 @@
 <template>
-  <div>
-  <div class="btn-group mb-1" v-for="y in diceToRoll">
-    <button type="button" class="btn btn-default btn-sm" @click="$emit('output', (d(1, y)))">d{{y}}</button>
-    <button type="button" class="btn btn-default btn-sm dropdown-toggle dropdown-toggle-split mr-1" data-toggle="dropdown" aria-expanded="false">
-      <span class="sr-only">Toggle Dropdown</span>
-    </button>
-    <div class="dropdown-menu">
-      <a v-for="x in dropdownList" class="dropdown-item" @click="$emit('output', (d(x, y)))">{{x}}d{{y}}</a>
+  <div class="d-inline-flex">
+    <div class="btn-group mb-1" v-for="y in diceToRoll">
+      <button type="button" class="btn btn-default btn-sm" @click="$emit('output', (d(1, y)))">d{{y}}</button>
+      <button type="button" class="btn btn-default btn-sm dropdown-toggle dropdown-toggle-split mr-1" data-toggle="dropdown" aria-expanded="false">
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <div class="dropdown-menu">
+        <a v-for="x in dropdownList" class="dropdown-item" @click="$emit('output', (d(x, y)))">{{x}}d{{y}}</a>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 

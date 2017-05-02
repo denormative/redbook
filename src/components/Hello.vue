@@ -3,11 +3,7 @@
     <div class="d-flex flex-row">
       <div class="flex-col">
         <basic-dice v-on:output="value => output(value)"></basic-dice>
-
-        <h6 class="buttonLabel" data-toggle="collapse" href="#dice-buttons">Special Dice</h6>
-        <div id="dice-buttons" class="collapse show">
-          <button class="btn btn-default btn-sm mr-1 " v-for="d in specialRolls" @click="output(multiple(d.n, d.x, d.y))">{{d.n}} x {{ d.x!=1 ? d.x : "" }}d{{d.y}}</button>
-        </div>
+        <special-dice v-on:output="value => output(value)"></special-dice>
 
         <h6 class="buttonLabel" data-toggle="collapse" href="#basic-tables-buttons">Basic Tables</h6>
         <div id="basic-tables-buttons" class="collapse show">
@@ -305,6 +301,7 @@
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import BasicDice from './BasicDice'
+import SpecialDice from './SpecialDice'
 
 import { rollAbilities } from '../vuex/abilities.js'
 import { roll } from '../assets/dice.js'
@@ -323,15 +320,11 @@ export default {
   props: [],
   components: {
     BasicDice,
+    SpecialDice,
   },
   data() {
     return {
       outputLog: "",
-      specialRolls: [
-        { n: 10, x: 1, y: 6, p: 0 },
-        { n: 10, x: 1, y: 20, p: 0 },
-        { n: 6, x: 3, y: 6, p: 0 },
-      ],
     }
   },
   mounted() {
