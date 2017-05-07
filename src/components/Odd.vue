@@ -16,7 +16,7 @@
       <textarea id="output-log" class="full-text-area" rows="20" cols="80">{{outputLog}}</textarea>
     </div>
   </div>
-  <!-- <div class="hello">
+  <!-- <div class="Odd">
   <div v-for="char in $store.state.party.characters">
   {{char.name}}
 </div>
@@ -54,7 +54,7 @@ import Experimental from './Experimental'
 import { rollAbilities } from '../vuex/abilities.js'
 
 export default {
-  name: 'hello',
+  name: 'Odd',
   props: [],
   components: {
     BasicDice,

@@ -1,11 +1,11 @@
 import Vue from 'vue';
-import Hello from '@/components/Hello';
+import Odd from '@/components/Odd';
 
-describe('Hello.vue', () => {
+describe('Odd.vue', () => {
   it('should render correct contents', () => {
-    const Constructor = Vue.extend(Hello);
+    const Constructor = Vue.extend(Odd);
     const vm = new Constructor().$mount();
-    expect(vm.$el.querySelector('.hello h1').textContent)
+    expect(vm.$el.querySelector('.Odd h1').textContent)
       .to.equal('Welcome to Your Vue.js App');
   });
 });
