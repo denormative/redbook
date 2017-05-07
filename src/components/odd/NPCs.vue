@@ -147,8 +147,8 @@
 
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
-import oddNPCs from '../assets/odd/oddNPCs.js'
-import { roll } from '../assets/dice.js'
+import oddNPCs from '@/assets/odd/oddNPCs.js'
+import { roll } from '@/assets/dice.js'
 
 export default {
   name: 'npcs',

@@ -9,7 +9,7 @@
 
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
-import { multiple } from '../assets/dice.js'
+import { multiple } from '@/assets/dice.js'
 
 export default {
   name: 'special-dice',

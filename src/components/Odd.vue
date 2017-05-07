@@ -42,14 +42,14 @@
 
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
-import BasicDice from './BasicDice'
-import SpecialDice from './SpecialDice'
-import BasicTables from './BasicTables'
-import TreasureTables from './TreasureTables'
-import EncounterTables from './EncounterTables'
-import Names from './Names'
-import NPCs from './NPCs'
-import Experimental from './Experimental'
+import BasicDice from './odd/BasicDice'
+import SpecialDice from './odd/SpecialDice'
+import BasicTables from './odd/BasicTables'
+import TreasureTables from './odd/TreasureTables'
+import EncounterTables from './odd/EncounterTables'
+import Names from './odd/Names'
+import NPCs from './odd/NPCs'
+import Experimental from './odd/Experimental'
 
 import { rollAbilities } from '../vuex/abilities.js'
 

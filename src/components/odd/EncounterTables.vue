@@ -42,9 +42,9 @@
 
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
-import oddDungeonEncounters from '../assets/odd/oddDungeonEncounters.js'
-import oddWildernessEncounters from '../assets/odd/oddWildernessEncounters.js'
-import { castleEncounter } from '../assets/odd/oddEncounters.js'
+import oddDungeonEncounters from '@/assets/odd/oddDungeonEncounters.js'
+import oddWildernessEncounters from '@/assets/odd/oddWildernessEncounters.js'
+import { castleEncounter } from '@/assets/odd/oddEncounters.js'
 
 export default {
   name: 'encounter-tables',

@@ -11,7 +11,7 @@
 
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
-import oddNames from '../assets/names/oddNames.js'
+import oddNames from '@/assets/names/oddNames.js'
 
 export default {
   name: 'names',

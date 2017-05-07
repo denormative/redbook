@@ -12,7 +12,7 @@
 
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
-import oddEncounters from '../assets/odd/oddEncounters.js'
+import oddEncounters from '@/assets/odd/oddEncounters.js'
 
 export default {
   name: 'experimental',

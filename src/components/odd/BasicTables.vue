@@ -11,7 +11,7 @@
 
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
-import oddUtils from '../assets/odd/oddUtils.js'
+import oddUtils from '@/assets/odd/oddUtils.js'
 
 export default {
   name: 'basic-tables',

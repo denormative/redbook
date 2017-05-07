@@ -14,7 +14,7 @@
 
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
-import { d } from '../assets/dice.js'
+import { d } from '@/assets/dice.js'
 
 export default {
   name: 'basic-dice',

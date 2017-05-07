@@ -62,10 +62,10 @@
 
 <script>
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
-import oddMagicSwords from '../assets/odd/oddMagicSwords.js'
-import oddMagicItems from '../assets/odd/oddMagicItems.js'
-import oddTreasureTables from '../assets/odd/oddTreasureTables.js'
-import { treasureMap } from '../assets/odd/oddTreasure.js'
+import oddMagicSwords from '@/assets/odd/oddMagicSwords.js'
+import oddMagicItems from '@/assets/odd/oddMagicItems.js'
+import oddTreasureTables from '@/assets/odd/oddTreasureTables.js'
+import { treasureMap } from '@/assets/odd/oddTreasure.js'
 
 export default {
   name: 'treasure-tables',
