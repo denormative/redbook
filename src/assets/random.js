@@ -16,14 +16,20 @@ function roll (dice: Dice): number {
   for (let i = 0; i < num; i += 1) {
     result += randomIntFromInterval(1, sides)
   }
-  return result + add
+  // can't roll less then one
+  return (result + add) < 1 ? 1 : result + add
 }
 
 function pick<T>(pickFrom: Array<T>): T {
   return pickFrom[randomIntFromInterval(0, pickFrom.length - 1)]
 }
 
+function rollTimes(dice: Dice, times: number) {
+  return Array(times).fill().map(() => roll(dice)).reduce((acc, cur) => acc + cur, 0)
+}
+
 export {
   roll,
   pick,
+  rollTimes,
 }

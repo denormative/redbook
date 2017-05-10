@@ -1,7 +1,7 @@
 // @flow
 
 import type { Character, PartyT, ClassT, BaseAbilitiesT } from '../types'
-import { roll, pick } from '../random'
+import { roll, pick, rollTimes } from '../random'
 import oddNames from '../names/oddNames.js'
 
 // returns modifier for ability score
@@ -75,12 +75,13 @@ function generateParty(): PartyT {
     const classType = pick(classList)
     const PClevel = roll([1, 3, 0])
 
-    console.log(classType)
     const c = {
       base: {
         name: (roll([1, 2, 0]) === 1 ? oddNames.masculineName() : oddNames.feminineName()) + oddNames.epithet(),
         class: classType,
         abilities: { str: 0, int: 0, wis: 0, dex: 0, con: 0, cha: 0 },
+        level: PClevel,
+        maxHp: 0,
       },
       abilities: {
         str: { score: 0, mod: 0 },
@@ -91,17 +92,16 @@ function generateParty(): PartyT {
         cha: { score: 0, mod: 0 },
       },
       hp: 0,
-      level: PClevel,
     }
     c.base.abilities = generateAbilities(classType)
     recalculateStatMods(c)
-    c.hp = roll([c.level, classType.hdType, 0])
+    c.base.maxHp = rollTimes([1, classType.hdType, c.abilities.con.mod], c.base.level)
+    c.hp = c.base.maxHp
 
     party.characters.push(c)
     number -= 1
   }
   recalculatePCs(party.characters)
-  console.log(party.characters)
 
   return party
 }

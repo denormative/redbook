@@ -4,10 +4,11 @@
       <button class="btn btn-danger ml-1" @click="rollEncounter()">Roll Encounter</button>
       <button class="btn btn-danger" @click="rollParty()">Roll Party</button>
     </div>
-    <div class="d-flex flex-row">
-      <div class="flex-col w-50">
+    <div class="d-flex flex-row justify-content-between">
+      <div class="flex-col">
         <div class="flex-row" v-for="c in party.characters">
           <div class="font-weight-bold">{{c.base.name}}</div>
+          <div>{{c.base.class.name}} {{c.base.level}}; hp: {{c.hp}}/{{c.base.maxHp}}</div>
           <span v-for="s in statsList">
             <span>{{statsName[s]}}: {{c.abilities[s].score}}
               <span v-if="c.abilities[s].mod<0"> ({{c.abilities[s].mod}}) </span>
@@ -16,7 +17,7 @@
           </span>
         </div>
       </div>
-      <div class="flex-col w-50">
+      <div class="flex-col">
         <div class="flex-row" v-for="m in encounter.monsters">
           <span class="font-weight-bold">{{m.base.name}}</span>
           <span class=""> AC: {{m.base.ac}} hp: {{m.hp}}</span>

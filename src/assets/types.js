@@ -21,6 +21,7 @@ export type Character = {
   base: {
     class: ClassT,
     abilities: BaseAbilitiesT,
+    maxHp: number,
   },
   abilities: {
     str: { score: number, mod: number },
@@ -30,6 +31,7 @@ export type Character = {
     con: { score: number, mod: number },
     cha: { score: number, mod: number },
   },
+  hp: number,
 }
 
 export type MonsterT = {
