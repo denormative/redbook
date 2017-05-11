@@ -1,7 +1,7 @@
 // @flow
 
 import type { Character, PartyT, ClassT, BaseAbilitiesT } from '../types'
-import { roll, pick, rollTimes } from '../random'
+import { roll, pick, rollTimes, rollMultiple } from '../random'
 import oddNames from '../names/oddNames.js'
 
 // returns modifier for ability score
@@ -37,6 +37,7 @@ function recalculateStatMods(c: Character) {
 }
 
 function recalculatePCs(characters: Array<Character>) {
+  // TODO: calculate experienceMultiplier here
   characters.forEach((c) => recalculateStatMods(c))
 }
 
@@ -45,23 +46,27 @@ const classList: Array<ClassT> = [
     id: "F",
     name: "Fighter",
     hdType: 8,
+    primeRequisite: "str",
+    chargen: {
+      priorityStatOrder: ["str", "con", "dex", "cha", "wis", "int"],
+    },
   },
   {
     id: "T",
     name: "Thief",
     hdType: 4,
+    primeRequisite: "dex",
+    chargen: {
+      priorityStatOrder: ["dex", "str", "con", "cha", "wis", "int"], // NOTE: maybe swap wis/int due to reading spell scrolls?
+    },
   },
 ]
 
 function generateAbilities(klass: ClassT): BaseAbilitiesT { // eslint-disable-line no-unused-vars
-  return {
-    str: roll([3, 6, 0]),
-    int: roll([3, 6, 0]),
-    wis: roll([3, 6, 0]),
-    dex: roll([3, 6, 0]),
-    con: roll([3, 6, 0]),
-    cha: roll([3, 6, 0]),
-  }
+  const stats: Array<number> = rollMultiple([3, 6, 0], 6).sort((a, b) => (a - b))
+  const abilities = { str: 0, int: 0, wis: 0, dex: 0, con: 0, cha: 0 }
+  klass.chargen.priorityStatOrder.forEach((ability) => { abilities[ability] = stats.pop() })
+  return abilities
 }
 
 function generateParty(): PartyT {
@@ -82,6 +87,21 @@ function generateParty(): PartyT {
         abilities: { str: 0, int: 0, wis: 0, dex: 0, con: 0, cha: 0 },
         level: PClevel,
         maxHp: 0,
+        money: {
+          pp: 0,
+          gp: 0,
+          ep: 0,
+          sp: 0,
+          cp: 0,
+        },
+        equipment: {
+          weapons: [
+          ],
+          armour: [
+          ],
+          misc: [
+          ],
+        },
       },
       abilities: {
         str: { score: 0, mod: 0 },
@@ -92,11 +112,13 @@ function generateParty(): PartyT {
         cha: { score: 0, mod: 0 },
       },
       hp: 0,
+      experienceMultiplier: 1.0,
     }
     c.base.abilities = generateAbilities(classType)
     recalculateStatMods(c)
     c.base.maxHp = rollTimes([1, classType.hdType, c.abilities.con.mod], c.base.level)
     c.hp = c.base.maxHp
+    c.base.money.gp = rollTimes([3, 6, c.abilities.con.mod], 10 * c.base.level) // FIXME: hack for money for level; should calc properly
 
     party.characters.push(c)
     number -= 1

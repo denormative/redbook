@@ -28,8 +28,13 @@ function rollTimes(dice: Dice, times: number) {
   return Array(times).fill().map(() => roll(dice)).reduce((acc, cur) => acc + cur, 0)
 }
 
+function rollMultiple (dice: Dice, rolls: number): Array<number> {
+  return Array(rolls).fill().map(() => roll(dice))
+}
+
 export {
   roll,
   pick,
   rollTimes,
+  rollMultiple,
 }

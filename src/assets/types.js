@@ -6,6 +6,10 @@ export type ClassT = {
   id: string,
   name: string,
   hdType: number,
+  primeRequisite: string, // TODO: handle specifing just str/int/wis/dex/con/cha
+  chargen: {
+    priorityStatOrder: Array<string>,
+  },
 }
 
 export type BaseAbilitiesT = {
@@ -17,11 +21,33 @@ export type BaseAbilitiesT = {
   cha: number,
 }
 
+export type MoneyT = {
+  pp: number,
+  gp: number,
+  ep: number,
+  sp: number,
+  cp: number,
+}
+
+export type ItemT = {
+  name: string,
+}
+
+export type ItemI = {
+  base: ItemT,
+}
+
 export type Character = {
   base: {
     class: ClassT,
     abilities: BaseAbilitiesT,
     maxHp: number,
+    money: MoneyT,
+    equipment: {
+      weapons: Array<ItemI>,
+      armour:  Array<ItemI>,
+      misc: Array<ItemI>,
+    },
   },
   abilities: {
     str: { score: number, mod: number },
@@ -32,6 +58,7 @@ export type Character = {
     cha: { score: number, mod: number },
   },
   hp: number,
+  experienceMultiplier: number,
 }
 
 export type MonsterT = {

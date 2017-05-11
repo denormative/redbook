@@ -15,6 +15,12 @@
               <span v-if="c.abilities[s].mod>0"> (+{{c.abilities[s].mod}}) </span>
             </span>
           </span>
+          <div>
+            Money:
+            <span v-for="m in moneyList">
+              <span v-if="c.base.money[m]>0">{{c.base.money[m]}}{{numberWithCommas(m)}} </span>
+            </span>
+          </div>
         </div>
       </div>
       <div class="flex-col">
@@ -38,6 +44,7 @@ import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import { generateParty } from "@/assets/red/PCs.js"
 import { generateEncounter } from "@/assets/red/Monsters.js"
 import type { Dice } from '../assets/types'
+import { numberWithCommas } from '../assets/utils'
 
 export default {
   name: 'red',
@@ -49,6 +56,7 @@ export default {
       outputLog: "",
       statsList: ["str", "int", "wis", "dex", "con", "cha"],
       statsName: { str: "S", int: "I", wis: "W", dex: "D", con: "C", cha: "X" },
+      moneyList: ["pp", "gp", "ep", "sp", "cp"],
       party: {
       },
       encounter: {
@@ -93,6 +101,7 @@ export default {
     rollEncounter() {
       this.encounter = generateEncounter()
     },
+    numberWithCommas,
   },
 }
 </script>
