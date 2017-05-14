@@ -29,9 +29,29 @@ export type MoneyT = {
   cp: number,
 }
 
-export type ItemT = {
+export type WeaponT = {|
   name: string,
-}
+  type: string, // TODO: need enum type for weapon/potion/whatever
+  use: Array<string>, // TODO: need enum tupe for melee/ranged/whatever
+  damage: Dice,
+  range: ?[number, number, number],
+  cost: { pp?: number, gp?: number, ep?: number, sp?: number, cp?: number },
+  enc: number,
+  hands: number,
+  size: string,
+  allowedClasses: Array<string>,
+|}
+
+export type ArmourT = {|
+  name: string,
+  type: string, // TODO: need enum type for weapon/potion/whatever
+  baseAC: number,
+  cost: { pp?: number, gp?: number, ep?: number, sp?: number, cp?: number },
+  enc: number,
+  allowedClasses: Array<string>,
+|}
+
+export type ItemT = WeaponT | ArmourT
 
 export type ItemI = {
   base: ItemT,
@@ -43,11 +63,7 @@ export type Character = {
     abilities: BaseAbilitiesT,
     maxHp: number,
     money: MoneyT,
-    equipment: {
-      weapons: Array<ItemI>,
-      armour:  Array<ItemI>,
-      misc: Array<ItemI>,
-    },
+    equipment: Array<ItemI>,
   },
   abilities: {
     str: { score: number, mod: number },
@@ -59,6 +75,10 @@ export type Character = {
   },
   hp: number,
   experienceMultiplier: number,
+  equipped: {
+    weapon?: ItemI,
+    armour?: ItemI,
+  },
 }
 
 export type MonsterT = {

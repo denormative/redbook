@@ -82,11 +82,6 @@ function generateEncounter(): EncounterT {
   return encounter
 }
 
-const redPCs = {
-  generateEncounter,
-}
-
 export {
-  redPCs as default,
-  generateEncounter,
+  generateEncounter, // eslint-disable-line
 }

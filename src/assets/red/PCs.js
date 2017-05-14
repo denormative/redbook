@@ -1,8 +1,9 @@
 // @flow
 
-import type { Character, PartyT, ClassT, BaseAbilitiesT } from '../types'
+import type { Character, PartyT, ClassT, BaseAbilitiesT, MoneyT, ItemT } from '../types'
 import { roll, pick, rollTimes, rollMultiple } from '../random'
 import oddNames from '../names/oddNames.js'
+import { itemList } from './items'
 
 // returns modifier for ability score
 function calcMod(score: number): number {
@@ -69,6 +70,13 @@ function generateAbilities(klass: ClassT): BaseAbilitiesT { // eslint-disable-li
   return abilities
 }
 
+function buy(money: MoneyT, item: ItemT) {
+  // FIXME: account for giving change
+  Object.keys(item.cost).forEach((p) => {
+    money[p] -= ((item.cost[p]: any): number) // NOTE: obnoxious typecasting hack but it should never be undefined
+  })
+}
+
 function generateParty(): PartyT {
   const party: PartyT = {
     characters: [],
@@ -94,14 +102,7 @@ function generateParty(): PartyT {
           sp: 0,
           cp: 0,
         },
-        equipment: {
-          weapons: [
-          ],
-          armour: [
-          ],
-          misc: [
-          ],
-        },
+        equipment: [],
       },
       abilities: {
         str: { score: 0, mod: 0 },
@@ -113,12 +114,22 @@ function generateParty(): PartyT {
       },
       hp: 0,
       experienceMultiplier: 1.0,
+      equipped: {
+      },
     }
     c.base.abilities = generateAbilities(classType)
     recalculateStatMods(c)
     c.base.maxHp = rollTimes([1, classType.hdType, c.abilities.con.mod], c.base.level)
     c.hp = c.base.maxHp
     c.base.money.gp = rollTimes([3, 6, c.abilities.con.mod], 10 * c.base.level) // FIXME: hack for money for level; should calc properly
+    c.equipped.weapon = {
+      base: pick(itemList.filter((item) => item.type === "weapon" && item.allowedClasses.includes(c.base.class.id))),
+    }
+    buy(c.base.money, c.equipped.weapon.base)
+    c.equipped.armour = {
+      base: pick(itemList.filter((item) => item.type === "armour" && item.allowedClasses.includes(c.base.class.id))),
+    }
+    buy(c.base.money, c.equipped.armour.base)
 
     party.characters.push(c)
     number -= 1
@@ -128,13 +139,7 @@ function generateParty(): PartyT {
   return party
 }
 
-const redPCs = {
-  recalculatePCs,
-  generateParty,
-}
-
 export {
-  redPCs as default,
   recalculatePCs,
   generateParty,
 }
