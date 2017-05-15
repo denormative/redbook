@@ -16,7 +16,15 @@
             </span>
           </span>
           <div>
-            Money:
+            <span v-if="c.equipped.weapon">
+              {{c.equipped.weapon.base.name}} ({{toDiceString(c.equipped.weapon.base.damage)}}<span v-if="!c.equipped.weapon.base.range">);</span><span v-else>,</span>
+              <span v-if="c.equipped.weapon.base.range">
+                range: {{c.equipped.weapon.base.range[0]}}/{{c.equipped.weapon.base.range[1]}}/{{c.equipped.weapon.base.range[2]}});
+              </span>
+            </span>
+            <span v-if="c.equipped.armour">
+              {{c.equipped.armour.base.name}} (AC {{c.equipped.armour.base.baseAC}});
+            </span>
             <span v-for="m in moneyList">
               <span v-if="c.base.money[m]>0">{{c.base.money[m]}}{{numberWithCommas(m)}} </span>
             </span>
@@ -34,7 +42,7 @@
       </div>
     </div>
     <div class="d-flex justify-content-center">
-      <textarea id="output-log" class="full-text-area" rows="20" cols="80">{{outputLog}}</textarea>
+      <textarea id="output-log" class="full-text-area" rows="10" cols="80">{{outputLog}}</textarea>
     </div>
   </div>
 </template>

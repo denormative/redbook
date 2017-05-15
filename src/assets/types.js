@@ -32,7 +32,7 @@ export type MoneyT = {
 export type WeaponT = {|
   name: string,
   type: string, // TODO: need enum type for weapon/potion/whatever
-  use: Array<string>, // TODO: need enum tupe for melee/ranged/whatever
+  action: { hit?: true, throw?: true }, // TODO: need enum tupe for melee/ranged/whatever
   damage: Dice,
   range: ?[number, number, number],
   cost: { pp?: number, gp?: number, ep?: number, sp?: number, cp?: number },

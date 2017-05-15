@@ -6,7 +6,7 @@ const itemList: Array<ItemT> = [
   {
     name: "Battle Axe",
     type: "weapon",
-    use: ["melee"],
+    action: { hit: true },
     damage: [1, 8, 0],
     range: undefined,
     cost: { gp: 7 },
@@ -18,7 +18,7 @@ const itemList: Array<ItemT> = [
   {
     name: "Hand Axe",
     type: "weapon",
-    use: ["melee", "thrown"],
+    action: { hit: true, throw: true },
     damage: [1, 6, 0],
     range: [10, 20, 30],
     cost: { gp: 4 },
