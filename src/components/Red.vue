@@ -8,7 +8,7 @@
       <div class="flex-col">
         <div class="flex-row" v-for="c in party.characters">
           <div class="font-weight-bold">{{c.base.name}}</div>
-          <div>{{c.base.class.name}} {{c.base.level}}; hp: {{c.hp}}/{{c.base.maxHp}}</div>
+          <div>{{c.base.class.name}} {{c.base.level}}; AC {{c.ac}}; hp: {{c.hp}}/{{c.base.maxHp}}; THAC0: {{c.THAC0}}</div>
           <span v-for="s in statsList">
             <span>{{statsName[s]}}: {{c.abilities[s].score}}
               <span v-if="c.abilities[s].mod<0"> ({{c.abilities[s].mod}}) </span>
@@ -17,8 +17,12 @@
           </span>
           <div>
             <span v-if="c.equipped.weapon">
-              {{c.equipped.weapon.base.name}} ({{toDiceString(c.equipped.weapon.base.damage)}}<span v-if="!c.equipped.weapon.base.range">);</span><span v-else>,</span>
-              <span v-if="c.equipped.weapon.base.range">
+              {{c.equipped.weapon.base.name}}
+              <span v-if="c.equipped.weapon.base.actions.hit && !c.equipped.weapon.base.actions.throw">
+                ({{toDiceString(c.equipped.weapon.base.damage)}});
+              </span>
+              <span v-if="c.equipped.weapon.base.actions.throw || c.equipped.weapon.base.actions.shoot">
+                ({{toDiceString(c.equipped.weapon.base.damage)}},
                 range: {{c.equipped.weapon.base.range[0]}}/{{c.equipped.weapon.base.range[1]}}/{{c.equipped.weapon.base.range[2]}});
               </span>
             </span>
@@ -76,7 +80,7 @@ export default {
       this.rollParty()
       this.output(JSON.stringify(this.party.characters))
       this.rollEncounter()
-      this.output(JSON.stringify(this.encounter))
+      // this.output(JSON.stringify(this.encounter))
     })
   },
   computed: {

@@ -1,50 +1,67 @@
 // @flow
 
-import type { ItemT } from '../types'
+import type { ItemT, MoneyT, Dice } from '../types'
+import itemListCsv from './items.csv'
 
-const itemList: Array<ItemT> = [
-  {
-    name: "Battle Axe",
-    type: "weapon",
-    action: { hit: true },
-    damage: [1, 8, 0],
-    range: undefined,
-    cost: { gp: 7 },
-    enc: 60,
-    hands: 2,
-    size: "M",
-    allowedClasses: ["F", "T"],
-  },
-  {
-    name: "Hand Axe",
-    type: "weapon",
-    action: { hit: true, throw: true },
-    damage: [1, 6, 0],
-    range: [10, 20, 30],
-    cost: { gp: 4 },
-    enc: 30,
-    hands: 1,
-    size: "S",
-    allowedClasses: ["F", "T"],
-  },
-  {
-    name: "Leather Armour",
-    type: "armour",
-    baseAC: 7,
-    cost: { gp: 10 },
-    enc: 100,
-    allowedClasses: ["F", "T", "D"],
-  },
-  {
-    name: "Scale Mail",
-    type: "armour",
-    baseAC: 6,
-    cost: { gp: 20 },
-    enc: 200,
-    allowedClasses: ["F"],
-  },
-]
-
-export {
-  itemList, // eslint-disable-line
+function str2objectset(csv: string): {[string]: true} {
+  const map = {}
+  csv.split(':').forEach((el) => { map[el] = true })
+  return map
+  // return csv.split(':').reduce((acc, cur) => ({ ...acc, cur: true }), map)
 }
+
+function string2dice(csv: string) : Dice {
+  const dice = csv.split(/[d+]/) // FIXME: hack, need to properly split on d/+/-/etc
+  return [dice[0] ? +dice[0] : 0, dice[1] ? +dice[1] : 0, dice[2] ? +dice[2] : 0]
+}
+
+function string2money(csv: string) : MoneyT {
+  const money: MoneyT = { pp: 0, gp: 0, ep: 0, sp: 0, cp: 0 }
+  let tempval
+  money.pp = (tempval = csv.match(/(\d+)pp/i)) ? +tempval : 0 // eslint-disable-line no-cond-assign
+  money.gp = (tempval = csv.match(/(\d+)gp/i)) ? +tempval : 0 // eslint-disable-line no-cond-assign
+  money.ep = (tempval = csv.match(/(\d+)ep/i)) ? +tempval : 0 // eslint-disable-line no-cond-assign
+  money.sp = (tempval = csv.match(/(\d+)sp/i)) ? +tempval : 0 // eslint-disable-line no-cond-assign
+  money.cp = (tempval = csv.match(/(\d+)cp/i)) ? +tempval : 0 // eslint-disable-line no-cond-assign
+
+  return money
+}
+
+function string2range(csv: string): [number, number, number] {
+  const range = csv.split(':')
+  if (range.length === 3) {
+    return [+range[0], +range[1], +range[2]]
+  }
+  return [0, 0, 0]
+}
+
+class ItemList {
+  items: Array<ItemT> = []
+  constructor() {
+    itemListCsv.forEach((csv) => {
+      const item: ItemT = {
+        name: csv.name,
+        type: csv.type,
+        actions: str2objectset(csv.actions),
+        damage: string2dice(csv.damage),
+        range: string2range(csv.range),
+        cost: string2money(csv.cost),
+        enc: csv.enc,
+        hands: csv.hands,
+        size: csv.size,
+        allowedClasses: csv.allowedClasses.split(':'),
+        baseAC: csv.baseAC,
+      }
+      this.items.push(item)
+    })
+  }
+
+  itemsForClass(classId: string, itemType?: string): Array<ItemT> {
+    if (itemType) {
+      return this.items.filter((item) => item.type === itemType && item.allowedClasses.includes(classId))
+    }
+    return this.items.filter((item) => item.allowedClasses.includes(classId))
+  }
+}
+
+export let itemList = new ItemList() // eslint-disable-line

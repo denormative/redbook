@@ -1,7 +1,9 @@
 [ignore]
+.*/node_modules/.*
 
 [include]
 
 [libs]
 
 [options]
+module.name_mapper='.*\.\(csv\)$' -> '<PROJECT_ROOT>/flowcsv.js'

@@ -1,0 +1,3 @@
+// @flow
+const s: Array<any> = []
+export default s

@@ -39,7 +39,12 @@ function recalculateStatMods(c: Character) {
 
 function recalculatePCs(characters: Array<Character>) {
   // TODO: calculate experienceMultiplier here
-  characters.forEach((c) => recalculateStatMods(c))
+  characters.forEach((c) => {
+    recalculateStatMods(c)
+    // base AC 9 unless armoured
+    c.ac = c.equipped.armour ? c.equipped.armour.base.baseAC : 9
+    c.ac -= c.abilities.dex.mod
+  })
 }
 
 const classList: Array<ClassT> = [
@@ -51,6 +56,13 @@ const classList: Array<ClassT> = [
     chargen: {
       priorityStatOrder: ["str", "con", "dex", "cha", "wis", "int"],
     },
+    THAC0: [20, 19, 19, 19],
+    savingThrows: [
+      [14, 15, 16, 17, 17], // 0th Level; Normal Man
+      [12, 13, 14, 15, 16],
+      [12, 13, 14, 15, 16],
+      [12, 13, 14, 15, 16],
+    ],
   },
   {
     id: "T",
@@ -60,6 +72,14 @@ const classList: Array<ClassT> = [
     chargen: {
       priorityStatOrder: ["dex", "str", "con", "cha", "wis", "int"], // NOTE: maybe swap wis/int due to reading spell scrolls?
     },
+    THAC0: [20, 19, 19, 19, 19],
+    savingThrows: [
+      [14, 15, 16, 17, 17], // 0th Level; Normal Man
+      [13, 14, 13, 16, 15],
+      [13, 14, 13, 16, 15],
+      [13, 14, 13, 16, 15],
+      [13, 14, 13, 16, 15],
+    ],
   },
 ]
 
@@ -103,6 +123,8 @@ function generateParty(): PartyT {
           cp: 0,
         },
         equipment: [],
+        alignment: "N",
+        savingThrows: [],
       },
       abilities: {
         str: { score: 0, mod: 0 },
@@ -116,20 +138,41 @@ function generateParty(): PartyT {
       experienceMultiplier: 1.0,
       equipped: {
       },
+      ac: 9,
+      THAC0: 19,
+      savingThrows: {
+        deathRayPoison: 14,
+        magicWands: 15,
+        paralysisTurnToStone: 15,
+        breathAttack: 17,
+        rodStaffSpell: 17,
+      },
     }
     c.base.abilities = generateAbilities(classType)
     recalculateStatMods(c)
     c.base.maxHp = rollTimes([1, classType.hdType, c.abilities.con.mod], c.base.level)
     c.hp = c.base.maxHp
     c.base.money.gp = rollTimes([3, 6, c.abilities.con.mod], 10 * c.base.level) // FIXME: hack for money for level; should calc properly
+
     c.equipped.weapon = {
-      base: pick(itemList.filter((item) => item.type === "weapon" && item.allowedClasses.includes(c.base.class.id))),
+      base: pick(itemList.itemsForClass(c.base.class.id, "weapon")),
     }
+    c.base.equipment.push(c.equipped.weapon)
     buy(c.base.money, c.equipped.weapon.base)
+
     c.equipped.armour = {
-      base: pick(itemList.filter((item) => item.type === "armour" && item.allowedClasses.includes(c.base.class.id))),
+      base: pick(itemList.itemsForClass(c.base.class.id, "armor")),
     }
+    c.base.equipment.push(c.equipped.armour)
     buy(c.base.money, c.equipped.armour.base)
+
+    c.base.alignment = roll([1, 2, 0]) === 1 ? "L" : "N"
+
+    c.savingThrows.deathRayPoison = classType.savingThrows[c.base.level][0]
+    c.savingThrows.magicWands = classType.savingThrows[c.base.level][1]
+    c.savingThrows.paralysisTurnToStone = classType.savingThrows[c.base.level][2]
+    c.savingThrows.breathAttack = classType.savingThrows[c.base.level][3]
+    c.savingThrows.rodStaffSpell = classType.savingThrows[c.base.level][4]
 
     party.characters.push(c)
     number -= 1

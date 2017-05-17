@@ -10,6 +10,8 @@ export type ClassT = {
   chargen: {
     priorityStatOrder: Array<string>,
   },
+  THAC0: Array<number>, // TODO: should pad this out as a 36 entry tuple
+  savingThrows: Array<[number, number, number, number, number]>,
 }
 
 export type BaseAbilitiesT = {
@@ -29,29 +31,21 @@ export type MoneyT = {
   cp: number,
 }
 
-export type WeaponT = {|
+export type ItemT = {
   name: string,
   type: string, // TODO: need enum type for weapon/potion/whatever
-  action: { hit?: true, throw?: true }, // TODO: need enum tupe for melee/ranged/whatever
-  damage: Dice,
-  range: ?[number, number, number],
-  cost: { pp?: number, gp?: number, ep?: number, sp?: number, cp?: number },
+  actions: { hit?: true, throw?: true, wear?: true }, // TODO: need enum tupe for melee/ranged/whatever
+  cost: MoneyT,
   enc: number,
+  allowedClasses: Array<string>,
+  // Weapon only
   hands: number,
+  damage: Dice,
+  range: [number, number, number],
   size: string,
-  allowedClasses: Array<string>,
-|}
-
-export type ArmourT = {|
-  name: string,
-  type: string, // TODO: need enum type for weapon/potion/whatever
+  // Armor only
   baseAC: number,
-  cost: { pp?: number, gp?: number, ep?: number, sp?: number, cp?: number },
-  enc: number,
-  allowedClasses: Array<string>,
-|}
-
-export type ItemT = WeaponT | ArmourT
+}
 
 export type ItemI = {
   base: ItemT,
@@ -64,6 +58,7 @@ export type Character = {
     maxHp: number,
     money: MoneyT,
     equipment: Array<ItemI>,
+    alignment: string,
   },
   abilities: {
     str: { score: number, mod: number },
@@ -78,6 +73,15 @@ export type Character = {
   equipped: {
     weapon?: ItemI,
     armour?: ItemI,
+  },
+  ac: number,
+  THAC0: number,
+  savingThrows: {
+    deathRayPoison: number,
+    magicWands: number,
+    paralysisTurnToStone: number,
+    breathAttack: number,
+    rodStaffSpell: number,
   },
 }
 
