@@ -108,7 +108,7 @@ function generateParty(): PartyT {
     const classType = pick(classList)
     const PClevel = roll([1, 3, 0])
 
-    const c = {
+    const c: Character = {
       base: {
         name: (roll([1, 2, 0]) === 1 ? oddNames.masculineName() : oddNames.feminineName()) + oddNames.epithet(),
         class: classType,
@@ -137,6 +137,8 @@ function generateParty(): PartyT {
       hp: 0,
       experienceMultiplier: 1.0,
       equipped: {
+        weapon: { base: itemList.noWeapon() },
+        armour: { base: itemList.noArmour() },
       },
       ac: 9,
       THAC0: 19,
@@ -161,7 +163,7 @@ function generateParty(): PartyT {
     buy(c.base.money, c.equipped.weapon.base)
 
     c.equipped.armour = {
-      base: pick(itemList.itemsForClass(c.base.class.id, "armor")),
+      base: pick(itemList.itemsForClass(c.base.class.id, "armour")),
     }
     c.base.equipment.push(c.equipped.armour)
     buy(c.base.money, c.equipped.armour.base)

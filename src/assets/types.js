@@ -1,6 +1,7 @@
 // @flow
 
 export type Dice = [ number, number, number ]
+export type RangeT = [ number, number, number ]
 
 export type ClassT = {
   id: string,
@@ -41,7 +42,7 @@ export type ItemT = {
   // Weapon only
   hands: number,
   damage: Dice,
-  range: [number, number, number],
+  range: RangeT,
   size: string,
   // Armor only
   baseAC: number,
@@ -53,7 +54,9 @@ export type ItemI = {
 
 export type Character = {
   base: {
+    name: string,
     class: ClassT,
+    level: number,
     abilities: BaseAbilitiesT,
     maxHp: number,
     money: MoneyT,
@@ -71,8 +74,8 @@ export type Character = {
   hp: number,
   experienceMultiplier: number,
   equipped: {
-    weapon?: ItemI,
-    armour?: ItemI,
+    weapon: ItemI,
+    armour: ItemI,
   },
   ac: number,
   THAC0: number,
@@ -113,13 +116,15 @@ export type MonsterT = {
   terrain: [string],
 }
 
-export type MonsterInstance = {
+export type MonsterI = {
   base: MonsterT,
   hp: number,
+  name: string,
 }
 
 export type EncounterT = {
-  monsters: Array<MonsterInstance>
+  monsters: Array<MonsterI>,
+  combatFinished: boolean,
 }
 
 export type PartyT = {

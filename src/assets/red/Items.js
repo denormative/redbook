@@ -62,6 +62,13 @@ class ItemList {
     }
     return this.items.filter((item) => item.allowedClasses.includes(classId))
   }
+
+  noWeapon(): ItemT {
+    return this.items.filter((i) => i.name === "Hands")[0]
+  }
+  noArmour(): ItemT {
+    return this.items.filter((i) => i.name === "No Armor")[0]
+  }
 }
 
 export let itemList = new ItemList() // eslint-disable-line

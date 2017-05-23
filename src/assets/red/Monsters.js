@@ -66,16 +66,17 @@ const monsterList: Array<MonsterT> = [
 function generateEncounter(): EncounterT {
   const encounter: EncounterT = {
     monsters: [],
+    combatFinished: false,
   }
 
   const monsterType = pick(monsterList)
-  console.log(monsterType)
+  // console.log(monsterType)
 
   let number = roll(monsterType.numberAppearing.dungeon)
-  console.log(number)
+  // console.log(number)
 
-  while (number > 0) {
-    encounter.monsters.push({ base: monsterType, hp: roll(monsterType.hd) })
+  for (let count = 1; count <= number; count++) {
+    encounter.monsters.push({ base: monsterType, hp: roll(monsterType.hd), name: `${monsterType.name} #${count}` })
     number -= 1
   }
 

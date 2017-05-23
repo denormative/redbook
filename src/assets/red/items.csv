@@ -1,6 +1,7 @@
 name,type,actions,damage,range,cost,enc,hands,size,allowedClasses,baseAC
+Hands,weapon,hit,1d1,,,,1,,,
+No Armor,armour,wear,,,,,,,,9
 Battle Axe,weapon,hit,1d8,,7gp,60,2,M,F:T
 Hand Axe,weapon,hit:throw,1d6,10:20:30,4gp,30,1,S,F:T,
-Leather Armor,armor,wear,,,10gp,100,,,F:T:D,7
-Scale Mail,armor,wear,,,20gp,200,,,F,6
-,,,,,,,,,,
+Leather Armor,armour,wear,,,10gp,100,,,F:T:D,7
+Scale Mail,armour,wear,,,20gp,200,,,F,6
